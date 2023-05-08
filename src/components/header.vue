@@ -14,7 +14,6 @@
     
           <div class="col-md-3 text-end">
             <router-link to="/login"><button type="button" class="btn btn-outline-primary me-2">登录</button></router-link>
-            <router-link to="/signup"><button type="button" class="btn btn-outline-primary me-2">注册</button></router-link>
           </div>
         </header>
       </div>

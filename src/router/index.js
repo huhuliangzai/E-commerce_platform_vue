@@ -5,7 +5,7 @@ import MyOrderRouter from './ModelRoter/MyOrders.js'
 import IndividualCenterRouter from './ModelRoter/IndividualCenter.js';
 import HomeRouter from './ModelRoter/Home.js';
 import LoginRouter from './ModelRoter/Login.js';
-import RegisteredRouter from './ModelRoter/Registered.js';
+import BuyRouter from './ModelRoter/buy.js';
 
 
 const routes = [
@@ -18,7 +18,7 @@ const routes = [
   ...MyOrderRouter,
   ...IndividualCenterRouter,
   ...LoginRouter,
-  ...RegisteredRouter,
+  ...BuyRouter
 ]
 
 const router = createRouter({

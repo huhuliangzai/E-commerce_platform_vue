@@ -5,7 +5,7 @@
    <div class="row row-deck row-cards">
       <div class="col-md-6 col-lg-4 my-2">
          <div class="card">
-            <div class="newrp_bg">
+            <div class="newrp_bg img-fluid">
                <div class="content">
                   <div>
                      <h3>近期热推！！</h3>
@@ -34,7 +34,7 @@
                      </div>
                      <img src="../../assets/image/beef.png" alt="">
                   </div>
-                  <a href="###">速速去购买></a>
+                  <router-link to="/home/buy">速速去购买></router-link>
                </div>
                <div class="col-sm-4 p-3  text-dark border">
                   <div class="good_content">
@@ -62,6 +62,7 @@
    </div>
    <crezybuy class="mt-2"></crezybuy>
    <backtop></backtop>
+   <goodlist></goodlist>
 </template>
 
 <script setup>
@@ -73,10 +74,10 @@ import backtop from '@/components/Backtop.vue'
 
 
 import crezybuy from '@/views/HomeView/CrazyBuy.vue'
+import goodlist from '@/views/HomeView/Goodlist.vue'
 </script>
 
 <style scoped>
-
 .card {
    height: 100%;
 }

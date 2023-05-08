@@ -2,7 +2,7 @@ const HomeRouter = [
     {
         path: '/home',
         name: 'home',
-        component: ()=> import('../../views/HomeView/HomeView.vue')
+        component: ()=> import('../../views/HomeView/HomeView.vue'),
     }
 ]
 
