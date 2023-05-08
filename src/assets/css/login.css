@@ -191,7 +191,6 @@ img {
 /*-- Reset Code --*/
 
 
-
 /*-- Index-Page-Styling --*/
 
 html {
@@ -203,7 +202,7 @@ body {
     height: 100%;
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    padding: 0!important;
+    padding: 0 !important;
 
 }
 
@@ -297,7 +296,7 @@ ul.tick li input[type="checkbox"] {
     display: none;
 }
 
-ul.tick li input[type="checkbox"]+label {
+ul.tick li input[type="checkbox"] + label {
     position: relative;
     padding-left: 30px;
     border: #F0F8FF;
@@ -306,7 +305,7 @@ ul.tick li input[type="checkbox"]+label {
     color: #EEE;
 }
 
-ul.tick li input[type="checkbox"]+label span:first-child {
+ul.tick li input[type="checkbox"] + label span:first-child {
     width: 17px;
     height: 17px;
     display: inline-block;
@@ -317,9 +316,9 @@ ul.tick li input[type="checkbox"]+label span:first-child {
     bottom: 4px;
 }
 
-ul.tick li input[type="checkbox"]:checked+label span:first-child:before {
+ul.tick li input[type="checkbox"]:checked + label span:first-child:before {
     content: "";
-    background: url(../image/login_img/tick.png)no-repeat;
+    background: url(../image/login_img/tick.png) no-repeat;
     position: absolute;
     left: 3px;
     top: 3px;
@@ -502,16 +501,7 @@ input[type="password"] {
 /*-- Index-Page-Styling --*/
 
 
-
-
-
-
-
-
-
 /*--- Responsive Code ---*/
-
-
 
 
 @media screen and (max-width: 1440px) {
@@ -749,7 +739,6 @@ input[type="password"] {
         font-size: 12.4px;
     }
 }
-
 
 
 /*--- Responsive Code ---*/
