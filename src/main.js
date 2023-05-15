@@ -7,9 +7,8 @@ import '../node_modules/element-plus/dist/index.css'
 //引入jquery
 import $ from 'jquery'
 // 引入bootstrap
-import 'bootstrap'
 // 引入bootstrap样式
-import '../node_modules/bootstrap/dist/css/bootstrap.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import '../node_modules/bootstrap/dist/js/bootstrap.js'
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js'
 //引入bootstrap图标库
