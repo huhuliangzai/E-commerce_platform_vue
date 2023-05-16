@@ -6,7 +6,7 @@
             <div class="row">
                 <h5 class="text-danger">
                     <span><strong>全部商品</strong></span>
-                    <span class="ps-2">{{obj_goods.length}}</span>
+                    <span class="ps-2">{{ obj_goods.length }}</span>
                 </h5>
             </div>
             <div class="card" style="width: 100%;">
@@ -28,18 +28,18 @@
                     </ul>
                 </div>
                 <ul class="list-group list-group-flush py-2 mx-3">
-                    <li v-for="(item,index) in obj_goods" :key="index">
+                    <li v-for="(item, index) in obj_goods" :key="index">
                         <div class="order_shop border-bottom border-3">
                             <input class="form-check-input" type="checkbox" value="" id="shop_name" name="check">
                             <label class="form-check-label" for="shop_name">
-                                <strong>{{item.shop_name}}</strong>
+                                <strong>{{ item.shop_name }}</strong>
                             </label>
                         </div>
                         <div class="shop_order d-flex">
                             <div class="left d-flex">
                                 <input class="form-check-input" type="checkbox" value="" id="shop_name" name="check">
                                 <label class="form-check-label d-flex align-items-center" for="shop_name">
-                                    <img :src="'src/assets/image/good_show_img/'+item.good_img" alt="">
+                                    <img :src="'src/assets/image/good_show_img/' + item.good_img" alt="">
                                     <h4 class="ms-3">{{ item.good_name }}</h4>
                                 </label>
                             </div>
@@ -54,7 +54,7 @@
                                     <span>￥{{ item.total }}</span>
                                 </div>
                                 <div class="operate">
-                                    <button class="btn">删除</button>
+                                    <button class="btn" @click="removeItem(index)">删除</button>
                                 </div>
                             </div>
                         </div>
@@ -97,6 +97,11 @@ let allcheck = () => {
     }
 };
 
+
+let letnum = (index) => {
+    obj_goods[index].total = ref(obj_goods[index].order_quantity * obj_goods[index].price)
+}
+
 const obj_goods = reactive([
     {
         shop_name: '肉多多',
@@ -116,8 +121,18 @@ const obj_goods = reactive([
     }
 ])
 
-let letnum = (index)=>{
-    obj_goods[index].total = ref(obj_goods[index].order_quantity*obj_goods[index].price)
+//删除订单
+const removeItem = (index) => {
+    if (obj_goods.length < 2) {
+        var r = confirm('这是最后一个了,确认删除吗?');
+        if (r == true) {
+            obj_goods.splice(index, 1)
+        } else {
+            return;
+        }
+    }else{
+        obj_goods.splice(index, 1)
+    }
 }
 
 </script>
@@ -128,7 +143,7 @@ let letnum = (index)=>{
     height: 100%;
 }
 
-.left label img{
+.left label img {
     width: 150px;
     height: 150px;
 }
@@ -140,5 +155,4 @@ let letnum = (index)=>{
 .shop_order {
     width: 100%;
 }
-
 </style>
