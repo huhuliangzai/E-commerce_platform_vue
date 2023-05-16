@@ -53,7 +53,7 @@
                     <div class="quantity">
                         <p>
                             <span>购买数量:</span>
-                            <counter @change="buy_num"></counter>
+                            <counter></counter>
                             <span class="ps-2">库存量:</span><span>100</span><br>
                         </p>
                     </div>
@@ -106,6 +106,11 @@ const obj_good = reactive(
 )
 
 const tableData = [
+  {
+    name: 'Tom',
+    quantity: 99,
+    date: '2016-05-03',
+  },
   {
     name: 'Tom',
     quantity: 99,

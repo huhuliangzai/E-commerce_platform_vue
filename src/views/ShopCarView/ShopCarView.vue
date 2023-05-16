@@ -6,7 +6,7 @@
             <div class="row">
                 <h5 class="text-danger">
                     <span><strong>全部商品</strong></span>
-                    <span class="ps-2">0</span>
+                    <span class="ps-2">{{obj_goods.length}}</span>
                 </h5>
             </div>
             <div class="card" style="width: 100%;">
@@ -28,33 +28,35 @@
                     </ul>
                 </div>
                 <ul class="list-group list-group-flush py-2 mx-3">
-                    <li>
+                    <li v-for="(item,index) in obj_goods" :key="index">
                         <div class="order_shop border-bottom border-3">
                             <input class="form-check-input" type="checkbox" value="" id="shop_name" name="check">
                             <label class="form-check-label" for="shop_name">
-                                <strong>肉多多</strong>
+                                <strong>{{item.shop_name}}</strong>
                             </label>
                         </div>
                         <div class="shop_order d-flex">
-                            <input class="form-check-input me-3" type="checkbox" value="" id="shop_order" name="check">
-                            <label class="form-check-label d-flex align-items-center justify-content-between" for="shop_order">
-                                <div class="order_information d-flex align-items-center">
-                                    <img src="../../assets/image/good_show_img/4.jpg" alt=""/>
-                                    <h5><span>{{obj_good.name}}</span><span>300g</span></h5>
+                            <div class="left d-flex">
+                                <input class="form-check-input" type="checkbox" value="" id="shop_name" name="check">
+                                <label class="form-check-label d-flex align-items-center" for="shop_name">
+                                    <img :src="'src/assets/image/good_show_img/'+item.good_img" alt="">
+                                    <h4 class="ms-3">{{ item.good_name }}</h4>
+                                </label>
+                            </div>
+                            <div class="right d-flex align-items-center justify-content-around">
+                                <div class="price">
+                                    <span>￥{{ item.price }}</span>
                                 </div>
-                                <div class="good_price">
-                                    <span>￥{{obj_good.price}}</span>
+                                <div>
+                                    <counter v-model="item.order_quantity" @change="letnum(index)"></counter>
                                 </div>
-                                <div class="good_quantity">
-                                    <counter></counter>
+                                <div class="total">
+                                    <span>￥{{ item.total }}</span>
                                 </div>
-                                <div class="order_total pe-2">
-                                    <span>￥{{obj_good.total}}</span>
-                                </div>
-                                <div class="order_operate">
+                                <div class="operate">
                                     <button class="btn">删除</button>
                                 </div>
-                            </label>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -65,13 +67,13 @@
 
 <script setup>
 import { RouterLink, RouterView, } from "vue-router";
-import { reactive } from "vue";
+import { getCurrentInstance, reactive, ref } from "vue";
 import navBar from '@/components/header.vue'
 import search from '@/components/search.vue'
 import counter from '@/components/counter.vue'
 
 //全选方法
-let allcheck = ()=> {
+let allcheck = () => {
     var allbtn = document.getElementById('all');
     allbtn.onclick = () => {
         var flag = allbtn.checked;
@@ -86,7 +88,7 @@ let allcheck = ()=> {
         items[i].onclick = () => {   //对每个items设置点击事件
             var number = 0;     //记录被选中的个数
             for (var j = 0; j < items.length; j++) {
-                if(items[j].checked){
+                if (items[j].checked) {
                     number++;
                 }
             }
@@ -95,35 +97,48 @@ let allcheck = ()=> {
     }
 };
 
-const handleChange = (value) => {
-    console.log(value)
-  }
-
-const obj_good = reactive(
+const obj_goods = reactive([
     {
-    name: '冷冻雪花肥牛',
-    price: 99.00,
-    total: 0
+        shop_name: '肉多多',
+        good_name: '冷冻雪花肥牛',
+        price: 99.00,
+        order_quantity: 1,
+        total: 0,
+        good_img: '6.jpg',
     },
-)
+    {
+        shop_name: '肉多多2',
+        good_name: '冷冻雪花肥牛2',
+        price: 99.00,
+        order_quantity: 1,
+        total: 0,
+        good_img: '5.jpg',
+    }
+])
+
+let letnum = (index)=>{
+    obj_goods[index].total = ref(obj_goods[index].order_quantity*obj_goods[index].price)
+}
 
 </script>
 
 <style scoped>
-.shop_order{
-    width: 100%;
+.left {
+    width: 35%;
+    height: 100%;
 }
 
-.shop_order label{
-    width: 100%;
-}
-
-.order_information{
-    width: 23%;
-}
-
-.order_information img{
+.left label img{
     width: 150px;
     height: 150px;
 }
+
+.right {
+    width: 65%;
+}
+
+.shop_order {
+    width: 100%;
+}
+
 </style>
