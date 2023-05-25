@@ -1,5 +1,5 @@
 <template>
-    <div class="good_list border d-inline-flex">
+    <div class="good_list border d-inline-flex rounded">
         <div class="good_advertis">
             <img class="rounded-top img-fluid" src="@/assets/image/good_show_img/advertis1.jpg" alt="">
             <div class="good_advertis_bottom">
@@ -122,7 +122,7 @@ import {RouterLink} from 'vue-router';
     left: 0;
     content: '';
     z-index: 1;
-    background-color: #eb716bc7;
+    background-color: #da443dc7;
     width: 100%;
     height: 100%;
 }
