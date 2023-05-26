@@ -147,8 +147,8 @@ import {RouterLink} from 'vue-router';
     height: 50%;
 }
 .good_show_img img{
-    width: 85%;
-    height: 85%;
+    width: 17vw;
+    height: 32vh;
 }
 
 .hot_sale{
