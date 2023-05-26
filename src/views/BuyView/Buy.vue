@@ -96,7 +96,7 @@ import { RouterLink, RouterView } from 'vue-router';
 import navbar from '@/components/header.vue'
 import counter from '@/components/Counter.vue'
 
-import { reactive,ref,watch,onMounted} from 'vue'
+import { reactive} from 'vue'
 
 const obj_good = reactive(
     {

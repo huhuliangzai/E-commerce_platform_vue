@@ -1,5 +1,5 @@
 <template>
-    <div class="good_list border d-inline-flex rounded">
+    <div class="good_list d-inline-flex rounded">
         <div class="good_advertis">
             <img class="rounded-top img-fluid" src="@/assets/image/good_show_img/advertis1.jpg" alt="">
             <div class="good_advertis_bottom">

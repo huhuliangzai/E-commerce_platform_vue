@@ -1,7 +1,6 @@
 <template>
     <div id="app">
         <navBar></navBar>
-        <search></search>
         <div class="cantainer">
             <div class="row">
                 <h5 class="text-danger">
@@ -67,9 +66,7 @@
 
 <script setup>
 import { RouterLink, RouterView, } from "vue-router";
-import { getCurrentInstance, reactive, ref } from "vue";
 import navBar from '@/components/header.vue'
-import search from '@/components/search.vue'
 import counter from '@/components/counter.vue'
 
 //全选方法

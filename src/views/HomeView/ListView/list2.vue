@@ -1,5 +1,5 @@
 <template>
-    <div class="good_list border d-inline-flex rounded">
+    <div class="good_list d-inline-flex rounded">
         <div class="good_advertis">
             <img class="rounded-top img-fluid" src="../../../assets/image/category_pig/2.jpg" alt="">
             <div class="good_advertis_bottom">
@@ -7,12 +7,13 @@
                 <div class="good_advertis_bottom_content text-center text-white p-2 rounded-bottom">
                     <h4>新鲜美味</h4>
                     <p>全程把控&nbsp;放心之选</p>
-                    <router-link to="/home/buy"><button class="btn-big rounded-pill bg-white border-0 px-3 py-2 text-pink">立即抢购<i
-                        class="bi bi-arrow-right-circle"></i></button></router-link>
+                    <router-link to="/home/buy"><button
+                            class="btn-big rounded-pill bg-white border-0 px-3 py-2 text-pink">立即抢购<i
+                                class="bi bi-arrow-right-circle"></i></button></router-link>
                 </div>
             </div>
         </div>
-       <div class="good_show px-2 rounded d-flex flex-wrap justify-content-between">
+        <div class="good_show px-2 rounded d-flex flex-wrap justify-content-between">
             <div class="good_show_img mx-2">
                 <img class="rounded border" src="../../../assets/image/category_pig/5.jpg" alt="">
                 <p class="p-0 m-0 text-center">
@@ -57,15 +58,35 @@
                 </p>
             </div>
 
-            <div class="good_show_advertise mx-2 mt-4 mb-2 rounded ">
+            <div class="good_show_bottom d-flex">
+                <div class="good_show_advertise mx-2 mt-4 mb-2 rounded ">
+                    <img class="rounded img-fluid" src="../../../assets/image/category_pig/8.jpg" alt="">
+                    <div class="good_show_advertise_content rounded d-flex flex-column justify-content-center align-items-end">
+                        <h3 class="me-5">
+                            <strong class="text-white">精品猪副产品</strong>
+                        </h3>
+                        <span class="text-white me-5">农场直供的美味</span>
+                    </div>
+                </div>
 
+                <div class="good_show_advertise ms-4 mt-4 mb-2  rounded ">
+                    <img class="rounded img-fluid" src="../../../assets/image/category_pig/9.jpg" alt="">
+                    <div class="good_show_advertise_content rounded d-flex flex-column justify-content-center align-items-end">
+                        <h3 class="me-5">
+                            <strong class="text-white">散养黑猪猪肉</strong>
+                        </h3>
+                        <span class="text-white me-5">甄选优质品质,健康美味</span>
+                    </div>
+                </div>
             </div>
-       </div>
+
+
+        </div>
     </div>
 </template>
 
 <script>
-import {RouterLink} from 'vue-router';
+import { RouterLink } from 'vue-router';
 </script>
 
 <style lang="scss" scoped>
@@ -79,7 +100,7 @@ import {RouterLink} from 'vue-router';
 }
 
 .good_advertis img {
-    width: 228px;
+    width: 230px;
     height: 342px;
 }
 
@@ -118,23 +139,44 @@ import {RouterLink} from 'vue-router';
 .good_show {
     width: 80%;
     height: max-content;
-    background-color: #eb716b;
 }
 
-.good_show_img{
+
+.good_show_img {
     width: 22%;
     height: 100%;
 }
 
-.good_show_img img{
+.good_show_img img {
     width: 17vw;
     height: 32vh;
 }
 
-.good_show_advertise{
+.good_show_bottom{
+    width: 100%;
+    height: 100%;
+}
+
+.good_show_advertise {
     width: 48%;
     height: 39vh;
     background-color: aqua;
+    position: relative;
 }
 
+.good_show_advertise img {
+    width: 100%;
+    height: 100%;
+}
+
+.good_show_advertise_content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    z-index: 1;
+    background: linear-gradient(to left, #000000be, #fdfcfc79);
+    width: 100%;
+    height: 100%;
+}
 </style>
