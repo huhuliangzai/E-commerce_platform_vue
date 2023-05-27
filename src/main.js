@@ -18,7 +18,17 @@ import '../node_modules/bootstrap/bootstrap-icons-1.10.5/font/bootstrap-icons.cs
 import './assets/css/main.css'
 
 const app = createApp(App)
-
-
 app.use(router, ElementPlus, $)
+
+// const whiteList = ['/home','/login']
+
+// router.beforeEach((to,from,next)=>{
+//     if(whiteList.includes(to.path)){
+//         next()
+//     }else{
+//         next('/login')
+//     }
+    
+// })
+
 app.mount('#app')

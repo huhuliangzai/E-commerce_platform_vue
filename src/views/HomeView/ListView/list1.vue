@@ -1,9 +1,9 @@
 <template>
     <div class="good_list d-inline-flex rounded">
         <div class="good_advertis">
-            <img class="rounded-top img-fluid" src="@/assets/image/good_show_img/advertis1.jpg" alt="">
+            <img class="rounded-top img-fluid" src="@/assets/image/category_beef/advertis1.jpg" alt="">
             <div class="good_advertis_bottom">
-                <img class=" rounded-bottom img-fluid" src="@/assets/image/good_show_img/advertis2.jpg" alt="">
+                <img class=" rounded-bottom img-fluid" src="@/assets/image/category_beef/advertis2.jpg" alt="">
                 <div class="good_advertis_bottom_content text-center text-white p-2 rounded-bottom">
                     <h4>新鲜美味</h4>
                     <p>全程把控&nbsp;放心之选</p>
@@ -14,41 +14,12 @@
         </div>
         <div class="good_show mx-1 rounded p-1 text-center d-flex flex-wrap">
 
-            <div class="good_show_img m-1 pt-1">
-                <img class="img_fluid border" src="@/assets/image/good_show_img/1.jpg" alt="">
-                <p class="p-0 m-0"><span>M6级雪花牛排</span></p>
-                <p class="m-0">￥138.00</p>
+            <div class="good_show_img m-1 pt-1" v-for="(item,index) in good_show" :key="index">
+                <img class="img_fluid border" :src="'src/assets/image/category_beef/'+item.img" alt="">
+                <p class="p-0 m-0"><span>{{item.name}}</span></p>
+                <p class="m-0 text-danger">￥{{item.price}}</p>
             </div>
 
-            <div class="good_show_img m-1 pt-1">
-                <img class="img_fluid border" src="@/assets/image/good_show_img/1.jpg" alt="">
-                <p class="p-0 m-0"><span>M6级雪花牛排</span></p>
-                <p class="m-0">￥138.00</p>
-            </div>
-
-            <div class="good_show_img m-1 pt-1">
-                <img class="img_fluid border" src="@/assets/image/good_show_img/1.jpg" alt="">
-                <p class="p-0 m-0"><span>M6级雪花牛排</span></p>
-                <p class="m-0">￥138.00</p>
-            </div>
-
-            <div class="good_show_img m-1 pt-1">
-                <img class="img_fluid border" src="@/assets/image/good_show_img/1.jpg" alt="">
-                <p class="p-0 m-0"><span>M6级雪花牛排</span></p>
-                <p class="m-0">￥138.00</p>
-            </div>
-
-            <div class="good_show_img m-1 pt-1">
-                <img class="img_fluid border" src="@/assets/image/good_show_img/1.jpg" alt="">
-                <p class="p-0 m-0"><span>M6级雪花牛排</span></p>
-                <p class="m-0">￥138.00</p>
-            </div>
-
-            <div class="good_show_img m-1 pt-1">
-                <img class="img_fluid border" src="@/assets/image/good_show_img/1.jpg" alt="">
-                <p class="p-0 m-0"><span>M6级雪花牛排</span></p>
-                <p class="m-0">￥138.00</p>
-            </div>
         </div>
         <div class="hot_sale">
             <div class="card rounded-0" style="width: 100%;">
@@ -56,28 +27,12 @@
                   <p class="p-0 m-0"> <i class="bi bi-rocket-fill text-danger"></i>热销推荐</p>
                 </div>
                 <ul class=" p-0 m-0 d-flex flex-column ">
-                    <li class="p-2 mt-1 d-flex align-items-center border">
-                        <img class="hot_sale_img " src="../../../assets/image/hot_sale_img/1.jpg" alt="">
+                    <li class="p-2 mt-1 d-flex align-items-center border" v-for="(item,index) in hot_sale" :key="index">
+                        <img class="hot_sale_img " :src="'src/assets/image/category_beef/hot_recommend/'+item.img" alt="">
                         <p class="text-start ms-2" style="white-space: nowrap; overflow:hidden;text-overflow:ellipsis">
-                            <small>牛肉汉堡肉饼</small><br>
-                            <span>无淀粉</span><span class="p-1">904g</span><br>
-                            <span class="text-danger">￥138</span>
-                        </p>
-                    </li>
-                    <li class="p-2 mt-1 d-flex align-items-center border">
-                        <img class="hot_sale_img " src="../../../assets/image/hot_sale_img/2.jpg" alt="">
-                        <p class="text-start ms-2" style="white-space: nowrap; overflow:hidden;text-overflow:ellipsis">
-                            <small>牛肉汉堡肉饼</small><br>
-                            <span>无淀粉</span><span class="p-1">904g</span><br>
-                            <span class="text-danger">￥138</span>
-                        </p>
-                    </li>
-                    <li class="p-2 mt-1 d-flex align-items-center border">
-                        <img class="hot_sale_img " src="../../../assets/image/hot_sale_img/3.jpg" alt="">
-                        <p class="text-start ms-2" style="white-space: nowrap; overflow:hidden;text-overflow:ellipsis">
-                            <small>牛肉汉堡肉饼</small><br>
-                            <span>无淀粉</span><span class="p-1">904g</span><br>
-                            <span class="text-danger">￥138</span>
+                            <small>{{item.name}}</small><br>
+                            <span class="p-1">{{item.weight}}</span><br>
+                            <span class="text-danger">￥{{item.price}}</span>
                         </p>
                     </li>
                 </ul>
@@ -86,8 +41,71 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import {RouterLink} from 'vue-router';
+import { reactive } from 'vue';
+
+const good_show = reactive ([
+    {
+        name: 'M6级雪花牛排',
+        weight: '680g',
+        price: '138.00',
+        img: '1.jpg'
+    },
+    {
+        name: 'M9原切雪花牛排',
+        weight: '500g',
+        price: '356.00',
+        img: '2.jpg'
+    },
+    {
+        name: '原切雪花和牛牛肉粒',
+        weight: '500g',
+        price: '358.00',
+        img: '3.jpg'
+    },
+    {
+        name: '西冷原切雪花牛排',
+        weight: '500g',
+        price: '288.00',
+        img: '4.jpg'
+    },
+    {
+        name: 'M6眼肉牛排',
+        weight: '400g',
+        price: '210.00',
+        img: '5.jpg'
+    },
+    {
+        name: '寿喜烧套餐',
+        weight: '750g',
+        price: '165.00',
+        img: '6.jpg'
+    },
+]);
+
+const hot_sale = reactive([
+    {
+        name: '牛肉汉堡肉饼',
+        weight: '904g',
+        price: '250.00',
+        img: '1.jpg'
+    },
+    {
+        name: '牛腱子肉原切',
+        weight: '1.5kg',
+        price: '77.00',
+        img: '2.jpg'
+    },
+    {
+        name: '国产谷饲肥牛卷',
+        weight: '500g/袋',
+        price: '158.00',
+        img: '3.jpg'
+    }
+])
+
+
 </script>
 
 <style lang="scss" scoped>

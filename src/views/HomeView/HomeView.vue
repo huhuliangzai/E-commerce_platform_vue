@@ -26,36 +26,16 @@
       <div class="col-md-12 col-lg-8 my-2">
          <div class="card">
             <div class="row text-center">
-               <div class="col-sm-4 p-3 text-dark border">
+               <div class="col-sm-4 p-3 text-dark border" v-for="(item,index) in hot_push" :key="index">
                   <div class="good_content">
                      <div class="good_title">
-                        <h5><span>冷冻雪花肥牛</span>&nbsp;<span>300g</span></h5>
-                        <p class="text-muted"><small>内蒙古</small>&nbsp;<small>谷饲</small></p>
+                        <h5><span>{{item.name}}</span>&nbsp;<span>{{item.weight}}</span></h5>
+                        <p class="text-muted"><small>产地:</small><small>{{item.source}}</small></p>
                      </div>
-                     <img src="../../assets/image/beef.png" alt="">
+                     <img :src="'src/assets/image/hot_push/'+item.img" alt="">
                   </div>
                   <router-link to="/home/buy">速速去购买></router-link>
-               </div>
-               <div class="col-sm-4 p-3  text-dark border">
-                  <div class="good_content">
-                     <div class="good_title">
-                        <h5><span>冷冻雪花肥牛</span>&nbsp;<span>300g</span></h5>
-                        <p class="text-muted"><small>内蒙古</small>&nbsp;<small>谷饲</small></p>
-                     </div>
-                     <img src="../../assets/image/beef.png" alt="">
-                  </div>
-                  <a href="###">速速去购买></a>
-               </div>
-               <div class="col-sm-4 p-3 text-dark border">
-                  <div class="good_content">
-                     <div class="good_title">
-                        <h5><span>冷冻雪花肥牛</span>&nbsp;<span>300g</span></h5>
-                        <p class="text-muted"><small>内蒙古</small>&nbsp;<small>谷饲</small></p>
-                     </div>
-                     <img src="../../assets/image/beef.png" alt="">
-                  </div>
-                  <a href="###">速速去购买></a>
-               </div>
+               </div> 
              </div>
          </div>
       </div>
@@ -67,6 +47,8 @@
 
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
+import { reactive } from 'vue';
+
 import navBar from '@/components/header.vue'
 import carousel from '@/components/Carousel.vue'
 import search from '@/components/Search.vue'
@@ -75,6 +57,27 @@ import backtop from '@/components/Backtop.vue'
 
 import crezybuy from '@/views/HomeView/CrazyBuy.vue'
 import goodlist from '@/views/HomeView/Goodlist.vue'
+
+const hot_push = reactive ([
+   {
+      name: '冷冻雪花肥牛',
+      weight: '300g',
+      source: '内蒙古',
+      img: '1.jpg'
+   },
+   {
+      name: '手打虾滑',
+      weight: '150g/袋',
+      source: '福建',
+      img: '2.jpg'
+   },
+   {
+      name: '真鳕鱼段',
+      weight: '500g/袋',
+      source: '挪威',
+      img: '3.jpg'
+   },
+])
 </script>
 
 <style scoped>
@@ -84,7 +87,7 @@ import goodlist from '@/views/HomeView/Goodlist.vue'
 
 .card .newrp_bg {
    height: 100%;
-   background: linear-gradient(rgba(17, 17, 17, 0.482), rgba(17, 17, 17, 0.425)), url(../../assets/image/beef.png) center no-repeat;
+   background: linear-gradient(rgba(17, 17, 17, 0.482), rgba(17, 17, 17, 0.425)), url(../../assets/image/hot_push/advertise.jpg) center no-repeat;
    background-size: cover;
    border-radius: 5px;
 }

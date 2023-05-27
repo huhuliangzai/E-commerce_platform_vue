@@ -1,9 +1,9 @@
 <template>
     <div class="good_list d-inline-flex rounded">
         <div class="good_advertis">
-            <img class="rounded-top img-fluid" src="../../../assets/image/category_pig/2.jpg" alt="">
+            <img class="rounded-top img-fluid" src="../../../assets/image/category_pig/advertise2.jpg" alt="">
             <div class="good_advertis_bottom">
-                <img class=" rounded-bottom img-fluid" src="../../../assets/image/category_pig/1.jpg" alt="">
+                <img class=" rounded-bottom img-fluid" src="../../../assets/image/category_pig/advertise1.jpg" alt="">
                 <div class="good_advertis_bottom_content text-center text-white p-2 rounded-bottom">
                     <h4>新鲜美味</h4>
                     <p>全程把控&nbsp;放心之选</p>
@@ -14,53 +14,21 @@
             </div>
         </div>
         <div class="good_show px-2 rounded d-flex flex-wrap justify-content-between">
-            <div class="good_show_img mx-2">
-                <img class="rounded border" src="../../../assets/image/category_pig/5.jpg" alt="">
+            
+            <div class="good_show_img mx-2" v-for="(item,index) in good_show" :key="index">
+                <img class="rounded border" :src="'src/assets/image/category_pig/'+item.img" alt="">
                 <p class="p-0 m-0 text-center">
-                    <span class="pe-2">大猪蹄</span>
-                    <span>1000g</span>
+                    <span class="pe-2">{{item.name}}</span>
+                    <span>{{item.weight}}</span>
                 </p>
                 <p class="p-0 m-0 text-center">
-                    <span class="text-danger">￥138</span>
-                </p>
-            </div>
-
-            <div class="good_show_img mx-2">
-                <img class="rounded border" src="../../../assets/image/category_pig/6.jpg" alt="">
-                <p class="p-0 m-0 text-center">
-                    <span class="pe-2">大猪蹄</span>
-                    <span>1000g</span>
-                </p>
-                <p class="p-0 m-0 text-center">
-                    <span class="text-danger">￥138</span>
-                </p>
-            </div>
-
-            <div class="good_show_img mx-2">
-                <img class="rounded border" src="../../../assets/image/category_pig/7.jpg" alt="">
-                <p class="p-0 m-0 text-center">
-                    <span class="pe-2">大猪蹄</span>
-                    <span>1000g</span>
-                </p>
-                <p class="p-0 m-0 text-center">
-                    <span class="text-danger">￥138</span>
-                </p>
-            </div>
-
-            <div class="good_show_img mx-2">
-                <img class="rounded border" src="../../../assets/image/category_pig/2.jpg" alt="">
-                <p class="p-0 m-0 text-center">
-                    <span class="pe-2">大猪蹄</span>
-                    <span>1000g</span>
-                </p>
-                <p class="p-0 m-0 text-center">
-                    <span class="text-danger">￥138</span>
+                    <span class="text-danger">￥{{item.price}}</span>
                 </p>
             </div>
 
             <div class="good_show_bottom d-flex">
                 <div class="good_show_advertise mx-2 mt-4 mb-2 rounded ">
-                    <img class="rounded img-fluid" src="../../../assets/image/category_pig/8.jpg" alt="">
+                    <img class="rounded img-fluid" src="../../../assets/image/category_pig/advertise3.jpg" alt="">
                     <div class="good_show_advertise_content rounded d-flex flex-column justify-content-center align-items-end">
                         <h3 class="me-5">
                             <strong class="text-white">精品猪副产品</strong>
@@ -70,7 +38,7 @@
                 </div>
 
                 <div class="good_show_advertise ms-4 mt-4 mb-2  rounded ">
-                    <img class="rounded img-fluid" src="../../../assets/image/category_pig/9.jpg" alt="">
+                    <img class="rounded img-fluid" src="../../../assets/image/category_pig/advertise4.jpg" alt="">
                     <div class="good_show_advertise_content rounded d-flex flex-column justify-content-center align-items-end">
                         <h3 class="me-5">
                             <strong class="text-white">散养黑猪猪肉</strong>
@@ -85,8 +53,36 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { RouterLink } from 'vue-router';
+import { reactive } from 'vue';
+
+const good_show = reactive([
+    {
+        name: '新鲜大猪蹄',
+        weight: '2kg',
+        price: '138.00',
+        img: '1.jpg'
+    },
+    {
+        name: '厚切猪排',
+        weight: '500g',
+        price: '56.00',
+        img: '2.jpg'
+    },
+    {
+        name: '猪廋肉',
+        weight: '500g',
+        price: '25.00',
+        img: '3.jpg'
+    },
+    {
+        name: '原切猪排',
+        weight: '500g',
+        price: '35.00',
+        img: '4.jpg'
+    },
+])
 </script>
 
 <style lang="scss" scoped>

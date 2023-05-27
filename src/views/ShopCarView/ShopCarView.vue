@@ -68,6 +68,7 @@
 import { RouterLink, RouterView, } from "vue-router";
 import navBar from '@/components/header.vue'
 import counter from '@/components/counter.vue'
+import { reactive,ref } from 'vue'
 
 //全选方法
 let allcheck = () => {
