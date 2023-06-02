@@ -27,17 +27,12 @@ export default defineConfig({
     port: 3000,
   },
   // proxy: {
-  //   '/api1': {
-  //     // 后台地址
-  //     target: 'http://127.0.0.1:8990/',
-  //     changeOrigin: true,
-  //     rewrite: path => path.replace(/^\/api1/, '')
-  //   },
-  //   '/api2': {
-  //     // 后台地址
-  //     target: 'http://127.0.0.1:8956/',
-  //     changeOrigin: true,
-  //     rewrite: path => path.replace(/^\/api2/, '')
+  //   "/api":{
+  //     target: 'http://localhost:8080/',      //后端接口的根目录
+  //     changeOrigin: true,                    //是否跨域
+  //     pathRewrite: {
+  //         '^/api': '/'
+  //     }
   //   }
   // }
 })

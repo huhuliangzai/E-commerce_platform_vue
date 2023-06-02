@@ -1,7 +1,7 @@
 <template>
     <div class="myInformation ms-2 border rounded p-2">
         <div class="information_content">
-            <ul class="p-0 m-0 border rounded">
+            <ul class="p-0 m-0 border rounded" >
                 <li class="p-2 m-0 border rounded-top">
                     <strong>用户名:</strong>
                 </li>
@@ -32,6 +32,18 @@
 </template>
 
 <script setup>
+import { reactive } from 'vue'
+
+import { getMyInformation } from '../../../api/getMyInformation';
+
+
+// const getInformation = async () =>{
+//     await getMyInformation().then(response =>{
+//         console.log(response);
+//     })
+// }
+
+// getInformation();
 
 </script>
 

@@ -223,11 +223,11 @@ body {
 }
 
 body a {
-    transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
     -o-transition: 0.5s all;
     -ms-transition: 0.5s all;
+    transition: 0.5s all;
     text-decoration: none;
     overflow: hidden !important;
 }
@@ -296,7 +296,7 @@ ul.tick li input[type="checkbox"] {
     display: none;
 }
 
-ul.tick li input[type="checkbox"] + label {
+ul.tick li input[type="checkbox"]+label {
     position: relative;
     padding-left: 30px;
     border: #F0F8FF;
@@ -305,7 +305,7 @@ ul.tick li input[type="checkbox"] + label {
     color: #EEE;
 }
 
-ul.tick li input[type="checkbox"] + label span:first-child {
+ul.tick li input[type="checkbox"]+label span:first-child {
     width: 17px;
     height: 17px;
     display: inline-block;
@@ -316,7 +316,7 @@ ul.tick li input[type="checkbox"] + label span:first-child {
     bottom: 4px;
 }
 
-ul.tick li input[type="checkbox"]:checked + label span:first-child:before {
+ul.tick li input[type="checkbox"]:checked+label span:first-child:before {
     content: "";
     background: url(../image/login_img/tick.png) no-repeat;
     position: absolute;
@@ -389,11 +389,11 @@ li.twt {
 }
 
 .social-icons ul li a:hover span.icons {
-    transform: rotatey(360deg);
     -webkit-transform: rotatey(360deg);
     -o-transform: rotatey(360deg);
     -moz-transform: rotatey(360deg);
     -ms-transform: rotatey(360deg);
+    transform: rotatey(360deg);
     transition: .5s all;
 }
 
@@ -426,11 +426,11 @@ input[type="password"] {
     border-width: thin;
     cursor: pointer;
     outline: none;
-    transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
     -o-transition: 0.5s all;
     -ms-transition: 0.5s all;
+    transition: 0.5s all;
     text-decoration: none;
 }
 
@@ -440,11 +440,11 @@ input[type="password"] {
     background-color: #000;
     border: 1px solid #FFF;
     color: #FFF;
-    transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
     -o-transition: 0.5s all;
     -ms-transition: 0.5s all;
+    transition: 0.5s all;
     text-decoration: none;
 }
 
