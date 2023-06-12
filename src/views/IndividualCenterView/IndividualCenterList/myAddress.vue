@@ -2,18 +2,18 @@
     <div class="myAddress ms-2 border rounded p-2">
         <div class="my_address">
             <ul class="p-0 m-0">
-                <li class="p-0 mb-2">
+                <li class="p-0 mb-2" v-for="(item, index) in userAddress" :key="index">
                     <span>
                         <strong>地址:</strong>
-                        <small>广东省中山市博爱七路25号中山职业技术学院</small>
+                        <small>{{ userAddress[index].addressDetail }}</small>
                     </span>
                     <span>
                         <strong>手机号:</strong>
-                        <small>13642444946</small>
+                        <small>{{userAddress[index].phoneNumber}}</small>
                     </span>
                     <span>
                         <strong>收货人:</strong>
-                        <small>蔡老六</small>
+                        <small>{{userAddress[index].name}}</small>
                     </span>
                 </li>
             </ul>
@@ -25,7 +25,28 @@
 </template>
 
 <script setup>
+import useUserStore from '../../../stores/user';
+import { getAddress } from '../../../api/getAddress';
+import { reactive, ref } from 'vue';
 
+const userStore = useUserStore();
+let user = userStore.user
+
+const userId = reactive({
+    userId: user.id
+});
+
+const userAddress = reactive([]);
+
+const getAddresses =async ()=>{
+    await getAddress(userId).then(response=>{
+        console.log(response);
+        userAddress.push(response.data.data)
+    })
+}
+
+getAddresses();
+console.log(userAddress);
 </script>
 
 <style scoped>

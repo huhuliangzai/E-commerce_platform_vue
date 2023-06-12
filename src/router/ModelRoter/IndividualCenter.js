@@ -25,7 +25,7 @@ const IndividualCenterRouter = [
                 component: ()=> import('../../views/IndividualCenterView/IndividualCenterList/complaintsFeedback.vue')
             },
         ],
-        redirect: '/IndividualCenter/myInformation'
+        // redirect: '/IndividualCenter/myInformation'
     }
 ]
 

@@ -15,7 +15,7 @@
         </div>
         <div class="good_show px-2 rounded d-flex flex-wrap justify-content-between">
             <div class="good_show_img mx-2 mb-4" v-for="(item,index) in good_show" :key="index">
-                <img class="rounded border" :src="'src/assets/image/category_chicken/'+item.img" alt="">
+                <img class="rounded border" :src="'src/assets/image/category_chicken/'+item.image" alt="">
                 <p class="p-0 m-0 text-center">
                     <span class="pe-2">{{item.name}}</span>
                     <span>{{item.weight}}</span>
@@ -32,56 +32,40 @@
 import { RouterLink } from 'vue-router';
 import { reactive} from 'vue'
 
-const good_show = reactive([
-    {
-        name: '白羽鸡胸肉',
-        weight: '1000g',
-        price: '45.00',
-        img: '1.jpg'
-    },
-    {
-        name: '白羽鸡全腿',
-        weight: '500g',
-        price: '50.00',
-        img: '2.jpg'
-    },
-    {
-        name: '白羽鸡翅根',
-        weight: '500g',
-        price: '55.00',
-        img: '3.jpg'
-    },
-    {
-        name: '白羽鸡中翅',
-        weight: '500g',
-        price: '65.00',
-        img: '4.jpg'
-    },
-    {
-        name: '白羽鸡爪',
-        weight: '750g',
-        price: '80.00',
-        img: '5.jpg'
-    },
-    {
-        name: '白羽鸡胗',
-        weight: '500g',
-        price: '80.00',
-        img: '6.jpg'
-    },
-    {
-        name: '鸡腿肉丁',
-        weight: '500g',
-        price: '45.00',
-        img: '7.jpg'
-    },
-    {
-        name: '白羽鸡翅尖',
-        weight: '500g',
-        price: '35.00',
-        img: '8.jpg'
-    },
-])
+import { getProducts } from '../../../api/getProducts';
+
+const good_show = reactive([]);
+
+
+const props = defineProps({
+    label: String
+})
+
+let setCategoryName = ({
+    categoryName: ''
+});
+
+
+const getCategory = () => {
+    // console.log("2我是分类名：", props.label);
+    setCategoryName.categoryName = props.label
+    // console.log(setCategoryName);
+}
+
+const get_products = async () => {
+    await getProducts(setCategoryName).then(response =>{
+        // console.log(response);
+        for (let i = 0; i < response.data.data.length; i++) {
+            good_show.push(response.data.data[i])
+        }
+        // console.log(good_show);
+    });
+}
+    
+setTimeout(() => {
+    getCategory();
+    get_products();
+}, 1000);
 </script>
 
 <style lang="scss" scoped>

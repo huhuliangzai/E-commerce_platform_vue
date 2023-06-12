@@ -9,6 +9,11 @@
         <el-form-item label="手机号码:" prop="user_phone">
             <el-input v-model="ruleForm.userPhone" type="text" autocomplete="off" />
         </el-form-item>
+        <div class="d-flex w-100 align-items-center justify-content-around mb-2">
+            <span>验证码:</span>
+            <el-input v-model="state.InfoVerify" type="text" class="w-25" />
+            <ImgVerify ref="verifyRef"/>
+        </div>
         <el-form-item label="密码:" prop="password">
             <el-input v-model="ruleForm.password" type="password" autocomplete="off" />
         </el-form-item>
@@ -23,6 +28,7 @@ import { reactive, ref } from 'vue'
 import { ElMessage, FormInstance, FormRules } from 'element-plus'
 import { register } from '../../../api/register'
 
+import ImgVerify  from '../../../components/ImgVerify.vue'
 
 let ruleFormRef = ref<FormInstance>()
 
@@ -65,6 +71,10 @@ const ruleForm = reactive({
     userPhone: ''
 })
 
+const state = reactive({
+    InfoVerify: '',
+})
+
 const rules = reactive<FormRules>({
     userName: [{ validator: validateName, trigger: 'blur' }],
     email: [{ validator: validateEmail, trigger: 'blur' }],
@@ -73,6 +83,12 @@ const rules = reactive<FormRules>({
 })
 
 const submitForm = async (formEl: FormInstance | undefined) => {
+    const verify = sessionStorage.getItem('verify');
+    // console.log(verify, state.InfoVerify.toUpperCase());
+    if(state.InfoVerify.toUpperCase() !== verify){
+        ElMessage.error("验证码不正确！！")
+        return
+    }
     if (!formEl) return
     formEl.validate((valid) => {
         if (valid) {

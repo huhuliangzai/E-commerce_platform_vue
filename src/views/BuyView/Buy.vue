@@ -5,7 +5,7 @@
             <div class="panel-body border d-flex justify-content-between">
                 <div class="left me-2 p-2">
                     <div class="buy_img">
-                        <img class="img-fluid rounded border" src="../../assets/image/good_show_img/6.jpg" alt="">
+                        <img class="img-fluid rounded border" src="../../assets/image/category_beef/1.jpg" alt="">
                     </div>
 
                     <div class="operate mt-3">

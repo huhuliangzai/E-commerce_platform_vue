@@ -1,12 +1,14 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import pinia from './stores/store'
 import ElementPlus, { ElMessage } from 'element-plus'
 import '../node_modules/element-plus/dist/index.css'
 
 //工具类引用
 import axios from './utils/axios'
 import Astrict from './utils/astrict'
+
 
 //引入jquery
 import $ from 'jquery'
@@ -17,14 +19,17 @@ import '../node_modules/bootstrap/dist/js/bootstrap.js'
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js'
 //引入bootstrap图标库
 import '../node_modules/bootstrap/bootstrap-icons-1.10.5/font/bootstrap-icons.css'
-
-
 import './assets/css/main.css'
 
 const app = createApp(App)
 app.use(router, ElementPlus, $, Astrict)
+app.use(pinia)
+
+app.mount('#app')
+app.config.globalProperties.$axios = axios;
 
 
+//路由前置守卫
 const whiteList = ['/home', '/login'];
 
 router.beforeEach((to, from, next) => {
@@ -36,11 +41,3 @@ router.beforeEach((to, from, next) => {
         next('/login')
     }
 });
-
-
-
-
-
-
-app.mount('#app')
-app.config.globalProperties.$axios = axios;

@@ -1,13 +1,13 @@
 <template>
-    <div>
+    <div id="app">
         <navBar></navBar>
         <div class="personal d-flex justify-content-start">
             <div class="personal_main border rounded p-2">
                 <ul class="p-0 m-0 text-center">
                     <li class="personal_top d-flex align-items-center border rounded-top p-2">
-                        <img class="rounded-circle" src="../../assets/image/User/avater.jpg" alt="">
+                        <img class="rounded-circle" :src="'src/assets/image/User/avater/'+user.avatar" alt="">
                         <div class="personal_information">
-                            <h5 class="p-0 m-0"><strong>蔡老六</strong></h5>
+                            <h5 class="p-0 m-0"><strong>{{user.userName}}</strong></h5>
                             <span>已实名</span>
                         </div>
                     </li>
@@ -46,8 +46,28 @@
 </template>
 
 <script setup>
-import { RouterLink,RouterView } from "vue-router";
+import { RouterLink,RouterView,useRouter } from "vue-router";
 import navBar from '@/components/header.vue'
+import { reactive } from 'vue'
+
+import pinia from '@/stores/store'
+import useUserStore from '../../stores/user';
+
+const userStore = useUserStore(pinia);
+
+let user = reactive(userStore.user)
+console.log(user);
+
+const router = useRouter();
+
+const routerRun = () =>{
+    router.push('/IndividualCenter/myInformation');
+}
+
+setTimeout(() => {
+    routerRun();
+}, 500);
+
 </script>
 
 <style scoped>

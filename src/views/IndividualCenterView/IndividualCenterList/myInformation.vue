@@ -3,25 +3,25 @@
         <div class="information_content">
             <ul class="p-0 m-0 border rounded" >
                 <li class="p-2 m-0 border rounded-top">
-                    <strong>用户名:</strong>
+                    <strong>用户名:{{ user.userName }}</strong>
                 </li>
                 <li class="p-2 m-0 border">
-                    <strong>性别:</strong>
+                    <strong>性别:{{ user.gender }}</strong>
                 </li>
                 <li class="p-2 m-0 border">
-                    <strong>手机号码:</strong>
+                    <strong>手机号码:{{ user.userPhone }}</strong>
                 </li>
                 <li class="p-2 m-0 border">
-                    <strong>我的邮箱:</strong>
+                    <strong>我的邮箱:{{ user.email }}</strong>
                 </li>
                 <li class="p-2 m-0 border">
-                    <strong>实名认证:</strong>
+                    <strong>实名认证:已认证</strong>
                 </li>
                 <li class="p-2 m-0 border rounded-bottom">
-                    <strong>我的爱好:</strong>
+                    <strong>我的爱好:{{ user.userHabby }}</strong>
                 </li>
                 <li class="p-2 m-0 border rounded-bottom">
-                    <strong>我的住址:</strong>
+                    <strong>我的住址:{{ user.address }}</strong>
                 </li>
             </ul> 
         </div>
@@ -33,18 +33,10 @@
 
 <script setup>
 import { reactive } from 'vue'
+import useUserStore from '../../../stores/user';
 
-import { getMyInformation } from '../../../api/getMyInformation';
-
-
-// const getInformation = async () =>{
-//     await getMyInformation().then(response =>{
-//         console.log(response);
-//     })
-// }
-
-// getInformation();
-
+const userStore = useUserStore();
+let user = userStore.user
 </script>
 
 <style scoped>

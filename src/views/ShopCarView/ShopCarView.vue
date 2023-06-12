@@ -28,26 +28,20 @@
                 </div>
                 <ul class="list-group list-group-flush py-2 mx-3">
                     <li v-for="(item, index) in obj_goods" :key="index">
-                        <div class="order_shop border-bottom border-3">
-                            <input class="form-check-input" type="checkbox" value="" id="shop_name" name="check">
-                            <label class="form-check-label" for="shop_name">
-                                <strong>{{ item.shop_name }}</strong>
-                            </label>
-                        </div>
-                        <div class="shop_order d-flex">
+                        <div class="shop_order d-flex mb-2 border">
                             <div class="left d-flex">
-                                <input class="form-check-input" type="checkbox" value="" id="shop_name" name="check">
+                                <input class="form-check-input me-2" type="checkbox" value="" id="shop_name" name="check">
                                 <label class="form-check-label d-flex align-items-center" for="shop_name">
-                                    <img :src="'src/assets/image/good_show_img/' + item.good_img" alt="">
-                                    <h4 class="ms-3">{{ item.good_name }}</h4>
+                                    <img :src="'src/assets/image/category_beef/' + item.image" alt="">
+                                    <h4 class="ms-3">{{ item.productName }}</h4>
                                 </label>
                             </div>
                             <div class="right d-flex align-items-center justify-content-around">
                                 <div class="price">
-                                    <span>￥{{ item.price }}</span>
+                                    <span>￥{{ item.productPrice }}</span>
                                 </div>
                                 <div>
-                                    <counter v-model="item.order_quantity" @change="letnum(index)"></counter>
+                                    <counter v-model="item.quantity" @change="letnum(index)"></counter>
                                 </div>
                                 <div class="total">
                                     <span>￥{{ item.total }}</span>
@@ -69,6 +63,11 @@ import { RouterLink, RouterView, } from "vue-router";
 import navBar from '@/components/header.vue'
 import counter from '@/components/counter.vue'
 import { reactive,ref } from 'vue'
+
+import pinia from '@/stores/store'
+import useUserStore from '../../stores/user';
+
+import { getCartItems } from '../../api/getCartItems'
 
 //全选方法
 let allcheck = () => {
@@ -95,29 +94,13 @@ let allcheck = () => {
     }
 };
 
-
+//计算总价
 let letnum = (index) => {
-    obj_goods[index].total = ref(obj_goods[index].order_quantity * obj_goods[index].price)
+    obj_goods[index].total = obj_goods[index].quantity * obj_goods[index].productPrice;
+    console.log(obj_goods[index]);
 }
 
-const obj_goods = reactive([
-    {
-        shop_name: '肉多多',
-        good_name: '冷冻雪花肥牛',
-        price: 99.00,
-        order_quantity: 1,
-        total: 0,
-        good_img: '6.jpg',
-    },
-    {
-        shop_name: '肉多多2',
-        good_name: '冷冻雪花肥牛2',
-        price: 99.00,
-        order_quantity: 1,
-        total: 0,
-        good_img: '5.jpg',
-    }
-])
+const obj_goods = reactive([])
 
 //删除订单
 const removeItem = (index) => {
@@ -132,6 +115,23 @@ const removeItem = (index) => {
         obj_goods.splice(index, 1)
     }
 }
+
+const userStore = useUserStore(pinia);
+// console.log(userStore.user);
+
+let id = userStore.user.id
+
+const getCartItemsProducts = async () =>{
+    await getCartItems({id}).then(response=>{
+        console.log(response);
+        for(let i = 0; i < response.data.data.length; i++){
+            obj_goods.push(response.data.data[i])
+        }
+    })
+}
+getCartItemsProducts();
+
+console.log(obj_goods);
 
 </script>
 

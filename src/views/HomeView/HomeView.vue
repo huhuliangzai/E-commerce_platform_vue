@@ -26,17 +26,17 @@
       <div class="col-md-12 col-lg-8 my-2">
          <div class="card">
             <div class="row text-center">
-               <div class="col-sm-4 p-3 text-dark border" v-for="(item,index) in hot_push" :key="index">
+               <div class="col-sm-4 p-3 text-dark border" v-for="(item, index) in hot_push" :key="index">
                   <div class="good_content">
                      <div class="good_title">
-                        <h5><span>{{item.name}}</span>&nbsp;<span>{{item.weight}}</span></h5>
-                        <p class="text-muted"><small>产地:</small><small>{{item.source}}</small></p>
+                        <h5><span>{{ item.name }}</span>&nbsp;<span>{{ item.weight }}</span></h5>
+                        <p class="text-muted"><small>产地:</small><small></small></p>
                      </div>
-                     <img :src="'src/assets/image/hot_push/'+item.img" alt="">
+                     <img :src="'src/assets/image/hot_push/' + item.image" alt="">
                   </div>
                   <router-link to="/home/buy">速速去购买></router-link>
-               </div> 
-             </div>
+               </div>
+            </div>
          </div>
       </div>
    </div>
@@ -46,38 +46,35 @@
 </template>
 
 <script setup>
-import { RouterLink, RouterView } from 'vue-router';
-import { reactive } from 'vue';
+import { RouterLink, RouterView, useRoute } from 'vue-router';
+import { reactive, onMounted } from 'vue';
+
+import pinia from '@/stores/store'
+import useUserStore from '../../stores/user';
+import { getHotSaleAndCrazyProducts } from '../../api/getHotSaleAndCrazyProducts';
+
 
 import navBar from '@/components/header.vue'
 import carousel from '@/components/Carousel.vue'
 import search from '@/components/Search.vue'
 import backtop from '@/components/Backtop.vue'
-
-
 import crezybuy from '@/views/HomeView/CrazyBuy.vue'
 import goodlist from '@/views/HomeView/Goodlist.vue'
 
-const hot_push = reactive ([
-   {
-      name: '冷冻雪花肥牛',
-      weight: '300g',
-      source: '内蒙古',
-      img: '1.jpg'
-   },
-   {
-      name: '手打虾滑',
-      weight: '150g/袋',
-      source: '福建',
-      img: '2.jpg'
-   },
-   {
-      name: '真鳕鱼段',
-      weight: '500g/袋',
-      source: '挪威',
-      img: '3.jpg'
-   },
-])
+const hot_push = reactive([])
+
+const get_crazybuy = async () =>{
+    await getHotSaleAndCrazyProducts({categoryName: "热推"}).then(response => {
+        // console.log(response);
+        for (let i = 0; i < response.data.data.length;i++) {
+         hot_push.push(response.data.data[i])
+        }
+    })
+}
+
+get_crazybuy();
+
+
 </script>
 
 <style scoped>
@@ -118,24 +115,22 @@ const hot_push = reactive ([
    margin: 0 5px 0 5px;
 }
 
-.card .row{
+.card .row {
    width: 100%;
-   margin:0;
-   padding:0;
+   margin: 0;
+   padding: 0;
    border-radius: 2px;
 }
 
-.good_content img{
+.good_content img {
    width: 100%;
    height: 100%;
    border-radius: 5px;
 }
 
-.good_title{
+.good_title {
    background-color: #f5f5f5;
    border-radius: 5px;
    font-family: '宋体';
 }
-
-
 </style>

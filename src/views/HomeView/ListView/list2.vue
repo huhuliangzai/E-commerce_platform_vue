@@ -16,7 +16,7 @@
         <div class="good_show px-2 rounded d-flex flex-wrap justify-content-between">
             
             <div class="good_show_img mx-2" v-for="(item,index) in good_show" :key="index">
-                <img class="rounded border" :src="'src/assets/image/category_pig/'+item.img" alt="">
+                <img class="rounded border" :src="'src/assets/image/category_pig/'+item.image" alt="">
                 <p class="p-0 m-0 text-center">
                     <span class="pe-2">{{item.name}}</span>
                     <span>{{item.weight}}</span>
@@ -57,32 +57,40 @@
 import { RouterLink } from 'vue-router';
 import { reactive } from 'vue';
 
-const good_show = reactive([
-    {
-        name: '新鲜大猪蹄',
-        weight: '2kg',
-        price: '138.00',
-        img: '1.jpg'
-    },
-    {
-        name: '厚切猪排',
-        weight: '500g',
-        price: '56.00',
-        img: '2.jpg'
-    },
-    {
-        name: '猪廋肉',
-        weight: '500g',
-        price: '25.00',
-        img: '3.jpg'
-    },
-    {
-        name: '原切猪排',
-        weight: '500g',
-        price: '35.00',
-        img: '4.jpg'
-    },
-])
+import { getProducts } from '../../../api/getProducts';
+
+const good_show = reactive([]);
+
+
+const props = defineProps({
+    label: String
+})
+
+let setCategoryName = ({
+    categoryName: ''
+});
+
+
+const getCategory = () => {
+    // console.log("2我是分类名：", props.label);
+    setCategoryName.categoryName = props.label
+    // console.log(setCategoryName);
+}
+
+const get_products = async () => {
+    await getProducts(setCategoryName).then(response =>{
+        // console.log(response);
+        for (let i = 0; i < response.data.data.length; i++) {
+            good_show.push(response.data.data[i])
+        }
+        // console.log(good_show);
+    });
+}
+    
+setTimeout(() => {
+    getCategory();
+    get_products();
+}, 1000);
 </script>
 
 <style lang="scss" scoped>
