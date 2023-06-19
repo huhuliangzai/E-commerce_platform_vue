@@ -51,12 +51,12 @@ import navBar from '@/components/header.vue'
 import { reactive } from 'vue'
 
 import pinia from '@/stores/store'
-import useUserStore from '../../stores/user';
+import useUserStore from '@/stores/user';
 
 const userStore = useUserStore(pinia);
 
 let user = reactive(userStore.user)
-console.log(user);
+// console.log(user);
 
 const router = useRouter();
 

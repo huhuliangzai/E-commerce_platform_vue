@@ -15,7 +15,9 @@
         </div>
         <div class="good_show px-2 rounded d-flex flex-wrap justify-content-between">
             <div class="good_show_img mx-2 mb-4" v-for="(item,index) in good_show" :key="index">
-                <img class="rounded border" :src="'src/assets/image/category_chicken/'+item.image" alt="">
+                <router-link :to="{name: 'Buy', params: {id: item.id }}">
+                    <img class="rounded border" :src="'src/assets/image/'+item.image" alt="">
+                </router-link>
                 <p class="p-0 m-0 text-center">
                     <span class="pe-2">{{item.name}}</span>
                     <span>{{item.weight}}</span>

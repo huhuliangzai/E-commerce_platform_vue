@@ -1,32 +1,42 @@
 <template>
-    <div class="img-verify">
-        <canvas class="rounded" ref="verify" :width="state.width" :height="state.height" @click="handleDraw" />
+    <div class="img-verify d-flex justify-content-center rounded">
+        <canvas ref="verify" :width="state.width" :height="state.height" @click="handleDraw" class="rounded"/>
+        <p class="m-0 p-0 text-center pt-2 rounded" @click="handleDraw" :class="state.hidden">
+            点击获取验证码
+        </p>
     </div>
+    
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted, ref, toRef } from 'vue'
+import { reactive, onMounted, ref, } from 'vue'
 
 const verify = ref({} as HTMLCanvasElement)
 const state = reactive({
     pool: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', // 字符串
     width: 120,
     height: 40,
-    imgCode: ''
+    imgCode: '',
+    hidden:''
 })
-
 onMounted(() => {
     // 初始化绘制图片验证码
-    state.imgCode = draw()
-    // console.log(state.imgCode);
+    state.imgCode = draw();
 })
-
-
 // 点击图片重新绘制
 const handleDraw = () => {
     state.imgCode = draw()
-    sessionStorage.setItem('verify', state.imgCode)
+    sessionStorage.setItem("verify", state.imgCode)
+    // console.log(state.imgCode);
+    state.hidden = 'hidden';
 }
+
+// const change = () => {
+//     let obj_get = document.getElementById('get') as HTMLElement;
+//     obj_get.style.display = "none";
+//     // console.log(1);
+//     handleDraw()
+// }
 
 // 随机数
 const randomNum = (min: number, max: number) => {
@@ -107,13 +117,29 @@ const draw = () => {
         ctx.fillStyle = randomColor(150, 200)
         ctx.fill()
     }
-    sessionStorage.setItem('verify', imgCode)
     return imgCode
 }
 
 </script>
-<style type="text/css">
+<style scoped>
+.img-verify{
+    position: relative;
+}
+
 .img-verify canvas {
     cursor: pointer;
+    position: relative;
+}
+.img-verify p{
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    background-color: rgb(0, 0, 0);
+    width: 120px;
+    height: 40px;
+}
+
+.hidden{
+    display: none;
 }
 </style>

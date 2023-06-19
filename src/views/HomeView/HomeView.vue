@@ -32,9 +32,9 @@
                         <h5><span>{{ item.name }}</span>&nbsp;<span>{{ item.weight }}</span></h5>
                         <p class="text-muted"><small>产地:</small><small></small></p>
                      </div>
-                     <img :src="'src/assets/image/hot_push/' + item.image" alt="">
+                     <img :src="'src/assets/image/' + item.image" alt="">
                   </div>
-                  <router-link to="/home/buy">速速去购买></router-link>
+                  <router-link :to="{name: 'Buy', params: {id: item.id }}">速速去购买></router-link>
                </div>
             </div>
          </div>
@@ -49,8 +49,6 @@
 import { RouterLink, RouterView, useRoute } from 'vue-router';
 import { reactive, onMounted } from 'vue';
 
-import pinia from '@/stores/store'
-import useUserStore from '../../stores/user';
 import { getHotSaleAndCrazyProducts } from '../../api/getHotSaleAndCrazyProducts';
 
 
@@ -65,7 +63,7 @@ const hot_push = reactive([])
 
 const get_crazybuy = async () =>{
     await getHotSaleAndCrazyProducts({categoryName: "热推"}).then(response => {
-        // console.log(response);
+        console.log(response);
         for (let i = 0; i < response.data.data.length;i++) {
          hot_push.push(response.data.data[i])
         }

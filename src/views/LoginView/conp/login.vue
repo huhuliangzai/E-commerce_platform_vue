@@ -7,7 +7,7 @@
         <div class="d-flex w-100 align-items-center justify-content-around mb-2">
             <span>验证码:</span>
             <el-input v-model="state.InfoVerify" type="text" class="w-25" />
-            <ImgVerify ref="verifyRef"/>
+            <ImgVerify/>
         </div>
         <el-form-item label="密码:" prop="password">
             <el-input v-model="ruleForm.password" type="password" autocomplete="off" />
@@ -64,11 +64,12 @@ const rules = reactive<FormRules>({
 
 const submitForm = async (formEl: FormInstance | undefined) => {
     const verify = sessionStorage.getItem('verify');
-    // console.log(verify, state.InfoVerify.toUpperCase());
+    console.log(verify, state.InfoVerify.toUpperCase());
     if(state.InfoVerify.toUpperCase() !== verify){
         ElMessage.error("验证码不正确！！")
         return
     }
+    sessionStorage.clear();
     if (!formEl) return
     formEl.validate((valid) => {
         if (valid) {
@@ -110,7 +111,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 </script>
 
 <style>
-.el-form-item__label {
+:deep(.el-form-item__label) {
     color: white !important;
 }
 </style>

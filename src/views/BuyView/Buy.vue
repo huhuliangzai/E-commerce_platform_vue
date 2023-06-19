@@ -1,11 +1,11 @@
 <template>
-    <div class="pb-2">
+    <div class="pb-2" v-for="(item,index) in obj_good">
         <navbar/>
         <div class="panel panel-default border">
             <div class="panel-body border d-flex justify-content-between">
                 <div class="left me-2 p-2">
                     <div class="buy_img">
-                        <img class="img-fluid rounded border" src="../../assets/image/category_beef/1.jpg" alt="">
+                        <img class="img-fluid rounded border" :src="'src/assets/image/'+item.image" alt="">
                     </div>
 
                     <div class="operate mt-3">
@@ -20,7 +20,7 @@
                     <div class="title d-flex flex-row">
                         <div class="code_track d-inline-flex">
                             <h5 class="p-0 m-0">
-                                <span>{{obj_good.name}}</span>
+                                <span>{{item.name}}</span>
                                 <i class="bi bi-qr-code"></i>
                             </h5>
                             <div class="buy_code">
@@ -34,7 +34,7 @@
                     </div>
                     
                     <div class="buy_information pt-1 ps-4">
-                        <p><span>价格:￥</span><span class="text-danger h3" id="price">{{obj_good.price}}</span></p>
+                        <p><span>价格:￥</span><span class="text-danger h3" id="price">{{item.price}}</span></p>
                         <p>
                             <span>优惠:</span>
                             <span><svg data-v-877c0452="" t="1683035524861" class="icon p-0 m-0" viewBox="0 0 1024 1024"
@@ -76,8 +76,7 @@
         <div>
             <el-tabs type="border-card">
                 <el-tab-pane label="产品详情">
-                    <p>雪花牛肉指脂肪沉积到肌肉纤维之间形成明显的红、白相间状似大理石花纹的牛肉，类似于“雪花…
-                    雪花牛肉实际上就是肌肉里面的肌纤维束之间有很多毛细血管壁的外围沉积上脂肪，这样就形成的。和牛肉脂肪中富含熔点只有25摄氏度的油酸，所以说几乎到了入口即化的程度。</p>
+                    <p>{{ item.description }}</p>
                 </el-tab-pane>
                 <el-tab-pane label="销售记录">
                     <el-table :data="tableData" style="width: 100%;">
@@ -92,18 +91,15 @@
 </template>
 
 <script setup>
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterLink, RouterView, useRoute } from 'vue-router';
 import navbar from '@/components/header.vue'
 import counter from '@/components/Counter.vue'
 
+import { getProductById } from '../../api/getProductById'
+
 import { reactive} from 'vue'
 
-const obj_good = reactive(
-    {
-    name: '冷冻雪花肥牛',
-    price: 99.00,
-    },
-)
+const obj_good = reactive([]);
 
 const tableData = [
   {
@@ -118,6 +114,21 @@ const tableData = [
   },
 ]
 
+const route = useRoute();
+
+let id = route.params.id;
+
+console.log("我是Id", id);
+
+const getProduct = async () =>{
+    await getProductById({id}).then(response=>{
+        console.log(response.data);
+        obj_good.push(response.data.data[0]);
+    })
+    console.log(obj_good);
+}
+
+getProduct();
 </script>
 
 

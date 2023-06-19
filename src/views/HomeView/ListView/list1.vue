@@ -16,12 +16,16 @@
         <div class="good_show mx-1 rounded p-1 text-center d-flex flex-wrap">
 
             <div class="good_show_img m-1 pt-1" v-for="(item, index) in good_show" :key="index">
-                <img class="img_fluid border" :src="'src/assets/image/category_beef/' + item.image" alt="">
+                <router-link :to="{name: 'Buy', params: {id: item.id }}">
+                    <img class="img_fluid border" :src="'src/assets/image/' + item.image" alt="">
+                </router-link>
                 <p class="p-0 m-0"><span>{{ item.name }}</span></p>
                 <p class="m-0 text-danger">￥{{ item.price }}</p>
             </div>
 
         </div>
+
+
         <div class="hot_sale">
             <div class="card rounded-0" style="width: 100%;">
                 <div class="card-header rounded-0">
@@ -29,7 +33,7 @@
                 </div>
                 <ul class=" p-0 m-0 d-flex flex-column ">
                     <li class="p-2 mt-1 d-flex align-items-center border" v-for="(item, index) in hot_sale" :key="index">
-                        <img class="hot_sale_img " :src="'src/assets/image/category_beef/hot_recommend/' + item.image" alt="">
+                        <img class="hot_sale_img " :src="'src/assets/image/' + item.image" alt="">
                         <p class="text-start ms-2" style="white-space: nowrap; overflow:hidden;text-overflow:ellipsis">
                             <small>{{ item.name }}</small><br>
                             <span class="p-1">{{ item.weight }}</span><br>
@@ -70,7 +74,7 @@ const getCategory = () => {
 
 const get_products = async () => {
     await getProducts(setCategoryName).then(response =>{
-        // console.log(response);
+        console.log(response);
         for (let i = 0; i < response.data.data.length; i++) {
             good_show.push(response.data.data[i])
         }

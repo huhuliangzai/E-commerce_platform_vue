@@ -12,7 +12,7 @@
         <div class="d-flex w-100 align-items-center justify-content-around mb-2">
             <span>验证码:</span>
             <el-input v-model="state.InfoVerify" type="text" class="w-25" />
-            <ImgVerify ref="verifyRef"/>
+            <ImgVerify/>
         </div>
         <el-form-item label="密码:" prop="password">
             <el-input v-model="ruleForm.password" type="password" autocomplete="off" />

@@ -48,9 +48,13 @@
                                 </div>
                                 <div class="operate">
                                     <button class="btn" @click="removeItem(index)">删除</button>
+                                    <button class="btn">下单</button>
                                 </div>
                             </div>
                         </div>
+                    </li>
+                    <li v-if="obj_goods.length == 0">
+                        <h1 class="text-center">空空如也~</h1>
                     </li>
                 </ul>
             </div>
@@ -63,11 +67,14 @@ import { RouterLink, RouterView, } from "vue-router";
 import navBar from '@/components/header.vue'
 import counter from '@/components/counter.vue'
 import { reactive,ref } from 'vue'
+import { ElMessage } from 'element-plus'
 
 import pinia from '@/stores/store'
 import useUserStore from '../../stores/user';
 
 import { getCartItems } from '../../api/getCartItems'
+import { deleteCartItem } from "../../api/deleteCartItem";
+
 
 //全选方法
 let allcheck = () => {
@@ -103,7 +110,7 @@ let letnum = (index) => {
 const obj_goods = reactive([])
 
 //删除订单
-const removeItem = (index) => {
+const removeItem =async (index) => {
     if (obj_goods.length < 2) {
         var r = confirm('这是最后一个了,确认删除吗?');
         if (r == true) {
@@ -112,7 +119,10 @@ const removeItem = (index) => {
             return;
         }
     }else{
-        obj_goods.splice(index, 1)
+        await deleteCartItem({id: obj_goods[index].id}).then(response=>{
+            console.log(response);
+        })
+        obj_goods.splice(index, 1);
     }
 }
 
@@ -123,15 +133,19 @@ let id = userStore.user.id
 
 const getCartItemsProducts = async () =>{
     await getCartItems({id}).then(response=>{
-        console.log(response);
-        for(let i = 0; i < response.data.data.length; i++){
-            obj_goods.push(response.data.data[i])
+        // console.log(response);
+        if(response.data.data == null){
+            ElMessage.error("购物车空空如也哦~~")
+        }else{
+                for(let i = 0; i < response.data.data.length; i++){
+                obj_goods.push(response.data.data[i])
+            }
         }
     })
 }
 getCartItemsProducts();
 
-console.log(obj_goods);
+// console.log(obj_goods);
 
 </script>
 

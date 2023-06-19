@@ -1,6 +1,6 @@
 const BuyRouter = [
     {
-        path: '/home/buy',
+        path: '/:id',
         name: 'Buy',
         component: () => import('../../views/BuyView/Buy.vue')
     }

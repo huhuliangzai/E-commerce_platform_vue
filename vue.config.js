@@ -1,5 +1,8 @@
 const webpack = require('webpack')
 module.exports = {
+    publicPath: "./",
+    outputDir: "dist",
+    assertsDir: 'public',
     configureWebpack: {
         plugins: [
             new webpack.ProvidePlugin({
@@ -8,5 +11,5 @@ module.exports = {
                 'windows.jQuery': 'jquery'
             })
         ]
-    }
+    },
 }

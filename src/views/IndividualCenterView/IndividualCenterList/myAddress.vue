@@ -9,16 +9,41 @@
                     </span>
                     <span>
                         <strong>手机号:</strong>
-                        <small>{{userAddress[index].phoneNumber}}</small>
+                        <small>{{ userAddress[index].phoneNumber }}</small>
                     </span>
                     <span>
                         <strong>收货人:</strong>
-                        <small>{{userAddress[index].name}}</small>
+                        <small>{{ userAddress[index].name }}</small>
                     </span>
                 </li>
             </ul>
             <div class="text-center mt-2">
-                <button class="btn btn-outline-primary w-25">添加地址</button>
+                <button type="button" class="btn btn-outline-primary" @click="dialogFormVisible = true">
+                    添加地址
+                </button>
+                
+
+                <el-dialog v-model="dialogFormVisible" title="添加地址">
+                    <el-form :model="form">
+                        <el-form-item label="地址" :label-width="formLabelWidth">
+                            <el-input v-model="form.addressDetail" autocomplete="off" />
+                        </el-form-item>
+                        <el-form-item label="收货人" :label-width="formLabelWidth">
+                            <el-input v-model="form.name" autocomplete="off" />
+                        </el-form-item>
+                        <el-form-item label="电话号码" :label-width="formLabelWidth">
+                            <el-input v-model="form.phoneNumber" autocomplete="off" />
+                        </el-form-item>
+                    </el-form>
+                    <template #footer>
+                        <span class="dialog-footer">
+                            <el-button @click="dialogFormVisible = false">返回</el-button>
+                            <el-button type="primary" @click="insert_address">
+                                确认
+                            </el-button>
+                        </span>
+                    </template>
+                </el-dialog>
             </div>
         </div>
     </div>
@@ -28,6 +53,9 @@
 import useUserStore from '../../../stores/user';
 import { getAddress } from '../../../api/getAddress';
 import { reactive, ref } from 'vue';
+import { insertAddress } from '../../../api/insertAddress';
+import { ElMessage } from 'element-plus';
+
 
 const userStore = useUserStore();
 let user = userStore.user
@@ -38,15 +66,41 @@ const userId = reactive({
 
 const userAddress = reactive([]);
 
-const getAddresses =async ()=>{
-    await getAddress(userId).then(response=>{
+const getAddresses = async () => {
+    await getAddress(userId).then(response => {
         console.log(response);
-        userAddress.push(response.data.data)
+        if(response.data.data == null){
+            return
+        }else{
+            for(var i = 0; i < response.data.data.length; i++) {
+            userAddress.push(response.data.data[i]);
+        }
+        }
     })
 }
 
 getAddresses();
-console.log(userAddress);
+// console.log(userAddress);
+
+const dialogFormVisible = ref(false)
+const formLabelWidth = '140px'
+
+const form = reactive({
+    userId: user.id,
+    addressDetail: '',
+    name: '',
+    phoneNumber: '',
+})
+
+const insert_address = async()=>{
+    await insertAddress(form).then(response=>{
+        console.log(response);
+        if(response.data.status == 200){
+            ElMessage.success("添加成功");
+        }
+    })
+}
+
 </script>
 
 <style scoped>
@@ -56,11 +110,19 @@ console.log(userAddress);
     background-color: rgba(182, 224, 240, 0.709);
 }
 
-.myAddress ul li{
+.myAddress ul li {
     display: flex;
     justify-content: space-around;
     align-items: center;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.617);
+}
+
+.dialog-footer button:first-child {
+    margin-right: 10px;
+}
+
+.el-form-item__label{
+    color: black!important;
 }
 </style>

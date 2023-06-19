@@ -1,7 +1,8 @@
 import axios from "axios";
-export const getUser = ()=>{
+export const getUser = (data)=>{
     return axios({
         method: "POST",
-        url: 'getUser'
+        url: 'getUser',
+        data
     })
 }
