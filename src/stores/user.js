@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { defineStore } from 'pinia';
-import { getUser } from '@/api/getUser';
 import { ref, reactive } from 'vue'
 
 

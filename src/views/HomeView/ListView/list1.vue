@@ -1,9 +1,9 @@
 <template>
     <div class="good_list d-inline-flex rounded">
         <div class="good_advertis">
-            <img class="rounded-top img-fluid" src="@/assets/image/category_beef/advertis1.jpg" alt="">
+            <img class="rounded-top img-fluid" src="../../../assets/image/category_beef/advertis1.jpg" alt="">
             <div class="good_advertis_bottom">
-                <img class=" rounded-bottom img-fluid" src="@/assets/image/category_beef/advertis2.jpg" alt="">
+                <img class=" rounded-bottom img-fluid" src="../../../assets/image/category_beef/advertis2.jpg" alt="">
                 <div class="good_advertis_bottom_content text-center text-white p-2 rounded-bottom">
                     <h4>新鲜美味</h4>
                     <p>全程把控&nbsp;放心之选</p>
@@ -50,8 +50,8 @@
 import { RouterLink } from 'vue-router';
 import { reactive } from 'vue';
 
-import { getProducts } from '../../../api/getProducts';
-import { getHotSaleAndCrazyProducts } from '../../../api/getHotSaleAndCrazyProducts';
+import { getProducts } from '@/api/getProducts';
+import { getHotSaleAndCrazyProducts } from '@/api/getHotSaleAndCrazyProducts';
 
 const good_show = reactive([]);
 

@@ -16,6 +16,9 @@
                         <small>{{ userAddress[index].name }}</small>
                     </span>
                 </li>
+                <li class="text-center" v-if="userAddress.length == 0">
+                    <h6>添加一个地址吧...</h6>
+                </li>
             </ul>
             <div class="text-center mt-2">
                 <button type="button" class="btn btn-outline-primary" @click="dialogFormVisible = true">
@@ -50,10 +53,10 @@
 </template>
 
 <script setup>
-import useUserStore from '../../../stores/user';
-import { getAddress } from '../../../api/getAddress';
+import useUserStore from '@/stores/user';
+import { getAddress } from '@/api/getAddress';
 import { reactive, ref } from 'vue';
-import { insertAddress } from '../../../api/insertAddress';
+import { insertAddress } from '@/api/insertAddress';
 import { ElMessage } from 'element-plus';
 
 

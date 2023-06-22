@@ -55,7 +55,6 @@ import register from './conp/register.vue'
 .all {
     width: 100%;
     height: 580px;
-    position: relative;
 }
 
 .universe {

@@ -27,7 +27,7 @@
 <script setup>
 import { RouterView,RouterLink } from 'vue-router';
 import { reactive } from 'vue'
-import { getHotSaleAndCrazyProducts } from '../../api/getHotSaleAndCrazyProducts';
+import { getHotSaleAndCrazyProducts } from '@/api/getHotSaleAndCrazyProducts';
 
 const crazy_buy = reactive ([])
 

@@ -32,7 +32,7 @@
                             <div class="left d-flex">
                                 <input class="form-check-input me-2" type="checkbox" value="" id="shop_name" name="check">
                                 <label class="form-check-label d-flex align-items-center" for="shop_name">
-                                    <img :src="'src/assets/image/category_beef/' + item.image" alt="">
+                                    <img :src="'src/assets/image/' + item.image" alt="">
                                     <h4 class="ms-3">{{ item.productName }}</h4>
                                 </label>
                             </div>
@@ -41,7 +41,7 @@
                                     <span>￥{{ item.productPrice }}</span>
                                 </div>
                                 <div>
-                                    <counter v-model="item.quantity" @change="letnum(index)"></counter>
+                                    <counter :min="1" v-model="item.quantity" @change="letnum(index)"></counter>
                                 </div>
                                 <div class="total">
                                     <span>￥{{ item.total }}</span>
@@ -65,15 +65,15 @@
 <script setup>
 import { RouterLink, RouterView, } from "vue-router";
 import navBar from '@/components/header.vue'
-import counter from '@/components/counter.vue'
+import counter from '@/components/Counter.vue'
 import { reactive,ref } from 'vue'
 import { ElMessage } from 'element-plus'
 
 import pinia from '@/stores/store'
-import useUserStore from '../../stores/user';
+import useUserStore from '@/stores/user';
 
-import { getCartItems } from '../../api/getCartItems'
-import { deleteCartItem } from "../../api/deleteCartItem";
+import { getCartItems } from '@/api/getCartItems'
+import { deleteCartItem } from "@/api/deleteCartItem";
 
 
 //全选方法

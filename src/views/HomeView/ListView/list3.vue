@@ -34,7 +34,7 @@
 import { RouterLink } from 'vue-router';
 import { reactive} from 'vue'
 
-import { getProducts } from '../../../api/getProducts';
+import { getProducts } from '@/api/getProducts';
 
 const good_show = reactive([]);
 

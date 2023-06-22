@@ -43,9 +43,9 @@
 </template>
 
 <script setup>
-import { getAllorders } from '../../../api/getAllOrders';
+import { getAllorders } from '@/api/getAllOrders';
 import { reactive, ref } from 'vue'
-import useUserStore  from '../../../stores/user';
+import useUserStore  from '@/stores/user';
 
 const userStore = useUserStore();
 

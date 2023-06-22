@@ -23,7 +23,7 @@ import { ref, reactive } from 'vue';
 import list1 from '@/views/HomeView/ListView/list1.vue'
 import list2 from '@/views/HomeView/ListView/list2.vue'
 import list3 from '@/views/HomeView/ListView/list3.vue'
-import {getAllCategory} from '../../api/getAllCategory'
+import {getAllCategory} from '@/api/getAllCategory'
 
 const category = reactive([]);
 let label = '';

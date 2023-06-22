@@ -16,6 +16,9 @@
                     <button class="btn btn-outline-danger mx-auto">取消收藏</button>
                 </div>
             </div>
+            <div class="text-center" v-if="collections.length == 0">
+                <h4>还没有收藏商品哦~~</h4>
+            </div>
         </div>
     </div>
 </template>
@@ -33,10 +36,13 @@ const userStore = useUserStore();
 const get_collectins = async () =>{
     await getMyCollectin({id: userStore.user.id}).then(response=>{
         console.log(response);
-        for(var i=0; i<response.data.data.length; i++){
+        if(response.data.data == null){
+            return
+        }else{
+            for(var i=0; i<response.data.data.length; i++){
             collections.push(response.data.data[0]);
         }
-        console.log(collections);
+        }
     })
 }
 

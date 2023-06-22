@@ -1,11 +1,11 @@
 <template>
-    <div class="pb-2" v-for="(item,index) in obj_good">
-        <navbar/>
+    <div class="pb-2" v-for="(item, index) in obj_good">
+        <navbar />
         <div class="panel panel-default border">
             <div class="panel-body border d-flex justify-content-between">
                 <div class="left me-2 p-2">
                     <div class="buy_img">
-                        <img class="img-fluid rounded border" :src="'src/assets/image/'+item.image" alt="">
+                        <img class="img-fluid rounded border" :src="'src/assets/image/' + item.image" alt="">
                     </div>
 
                     <div class="operate mt-3">
@@ -20,7 +20,7 @@
                     <div class="title d-flex flex-row">
                         <div class="code_track d-inline-flex">
                             <h5 class="p-0 m-0">
-                                <span>{{item.name}}</span>
+                                <span>{{ item.name }}</span>
                                 <i class="bi bi-qr-code"></i>
                             </h5>
                             <div class="buy_code">
@@ -32,9 +32,9 @@
                     <div class="collect my-3 ps-4">
                         <h6><span>收藏:</span><span class="ps-1">0</span></h6>
                     </div>
-                    
+
                     <div class="buy_information pt-1 ps-4">
-                        <p><span>价格:￥</span><span class="text-danger h3" id="price">{{item.price}}</span></p>
+                        <p><span>价格:￥</span><span class="text-danger h3" id="price">{{ item.price }}</span></p>
                         <p>
                             <span>优惠:</span>
                             <span><svg data-v-877c0452="" t="1683035524861" class="icon p-0 m-0" viewBox="0 0 1024 1024"
@@ -53,13 +53,15 @@
                     <div class="quantity">
                         <p>
                             <span>购买数量:</span>
-                            <counter></counter>
+                            <counter @change="letnum(index)" v-model="cartItem.Quantity"></counter>
                             <span class="ps-2">库存量:</span><span>100</span><br>
                         </p>
                     </div>
 
                     <div>
-                        <button class="text-danger bg-white border border-danger m-2 p-2 rounded"><i class="bi bi-cart-plus text-danger"></i>加入购物车</button>
+                        <button class="text-danger bg-white border border-danger m-2 p-2 rounded"
+                            @click="insert_CartItem"><i class="bi bi-cart-plus text-danger"
+                                v-disabled="cartItem.Quantity == 0"></i>加入购物车</button>
                         <button class="m-2 p-2 text-white bg-danger border-0  rounded">立即购买</button>
                     </div>
 
@@ -83,9 +85,9 @@
                         <el-table-column prop="name" label="买家" width="180" />
                         <el-table-column prop="quantity" label="数量" width="180" />
                         <el-table-column prop="date" label="成交时间" />
-                      </el-table>
+                    </el-table>
                 </el-tab-pane>
-              </el-tabs>
+            </el-tabs>
         </div>
     </div>
 </template>
@@ -95,23 +97,28 @@ import { RouterLink, RouterView, useRoute } from 'vue-router';
 import navbar from '@/components/header.vue'
 import counter from '@/components/Counter.vue'
 
-import { getProductById } from '../../api/getProductById'
+import { getProductById } from '@/api/getProductById'
+import { insertCartItem } from '@/api/insertCartItem'
+import useUserStore from '@/stores/user';
 
-import { reactive} from 'vue'
+import { reactive } from 'vue'
+import { ElMessage } from 'element-plus';
 
+
+const userStore = useUserStore();
 const obj_good = reactive([]);
 
 const tableData = [
-  {
-    name: 'Tom',
-    quantity: 99,
-    date: '2016-05-03',
-  },
-  {
-    name: 'Tom',
-    quantity: 99,
-    date: '2016-05-03',
-  },
+    {
+        name: 'Tom',
+        quantity: 99,
+        date: '2016-05-03',
+    },
+    {
+        name: 'Tom',
+        quantity: 99,
+        date: '2016-05-03',
+    },
 ]
 
 const route = useRoute();
@@ -120,15 +127,44 @@ let id = route.params.id;
 
 console.log("我是Id", id);
 
-const getProduct = async () =>{
-    await getProductById({id}).then(response=>{
-        console.log(response.data);
+const getProduct = async () => {
+    await getProductById({ id }).then(response => {
+        // console.log(response.data);
         obj_good.push(response.data.data[0]);
     })
     console.log(obj_good);
 }
-
 getProduct();
+
+const letnum = (index) => {
+    cartItem.total = cartItem.Quantity * obj_good[index].price;
+}
+
+const cartItem = reactive({
+    userId: userStore.user.id,
+    productId: id,
+    Quantity: 0,
+    total: '',
+})
+
+console.log(cartItem);
+
+const insert_CartItem = async () => {
+    if (cartItem.Quantity > 0) {
+        console.log(userStore.user);
+        console.log(cartItem);
+        await insertCartItem(cartItem).then(response => {
+            console.log(response);
+            if (response.data.status == 200) {
+                ElMessage.success("加入成功");
+            } else {
+                ElMessage.error("加入失败");
+            }
+        })
+    }else{
+        ElMessage.error("购买数量需大于0")
+    }
+}
 </script>
 
 
@@ -142,7 +178,7 @@ getProduct();
     height: 100%;
 }
 
-.operate ul li:hover{
+.operate ul li:hover {
     cursor: pointer;
 }
 
@@ -171,5 +207,4 @@ getProduct();
 .code_track:hover .buy_code {
     display: block;
 }
-
 </style>

@@ -5,22 +5,22 @@ const IndividualCenterRouter = [
         component: () => import ('../../views/IndividualCenterView/IndividualCenterView.vue'),
         children: [
             {
-                path: 'myInformation',
+                path: '',
                 name: 'MyInformation',
                 component: ()=> import('../../views/IndividualCenterView/IndividualCenterList/myInformation.vue')
             },
             {
-                path: 'myCollections',
+                path: '',
                 name: 'MyCollections',
                 component: ()=> import('../../views/IndividualCenterView/IndividualCenterList/myCollections.vue')
             },
             {
-                path: 'myAddress',
+                path: '',
                 name: 'MyAddress',
                 component: ()=> import('../../views/IndividualCenterView/IndividualCenterList/myAddress.vue')
             },
             {
-                path: 'complaintsFeedback',
+                path: '',
                 name: 'ComplaintsFeedback',
                 component: ()=> import('../../views/IndividualCenterView/IndividualCenterList/complaintsFeedback.vue')
             },

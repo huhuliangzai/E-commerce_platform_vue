@@ -12,28 +12,28 @@
                         </div>
                     </li>
                     <li class="border">
-                        <router-link to="/IndividualCenter/myInformation">
+                        <router-link :to="{name: 'MyInformation'}">
                             <i class="bi bi-person-vcard"></i>
                             <span>我的信息</span>
                         </router-link>
                     </li>
                     
                     <li class="border"> 
-                        <router-link to="/IndividualCenter/myCollections">
+                        <router-link :to="{name: 'MyCollections'}">
                             <i class="bi bi-ui-checks"></i>
                             <span>我的收藏</span>
                         </router-link>
                     </li>
 
                     <li class="border"> 
-                        <router-link to="/IndividualCenter/myAddress">
+                        <router-link :to="{name: 'MyAddress'}">
                             <i class="bi bi-geo-alt-fill"></i>
                             <span>我的地址</span>
                         </router-link>
                     </li>
 
                     <li class="border rounded-bottom"> 
-                        <router-link to="/IndividualCenter/complaintsFeedback">
+                        <router-link :to="{name: 'ComplaintsFeedback'}">
                             <i class="bi bi-envelope-paper-fill"></i>
                             <span>投诉与反馈</span>
                         </router-link>
@@ -58,15 +58,15 @@ const userStore = useUserStore(pinia);
 let user = reactive(userStore.user)
 // console.log(user);
 
-const router = useRouter();
+// const router = useRouter();
 
-const routerRun = () =>{
-    router.push('/IndividualCenter/myInformation');
-}
+// const routerRun = () =>{
+//     router.push('/IndividualCenter/myInformation');
+// }
 
-setTimeout(() => {
-    routerRun();
-}, 500);
+// setTimeout(() => {
+//     routerRun();
+// }, 500);
 
 </script>
 

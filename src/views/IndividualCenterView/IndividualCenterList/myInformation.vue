@@ -109,6 +109,7 @@ const get_user = async() =>{
     })
 }
 get_user();
+
 </script>
 
 <style scoped>
