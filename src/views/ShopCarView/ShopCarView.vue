@@ -48,7 +48,9 @@
                                 </div>
                                 <div class="operate">
                                     <button class="btn" @click="removeItem(index)">删除</button>
-                                    <button class="btn">下单</button>
+                                    <router-link :to="{name: 'order',params:{id: item.id}}">
+                                        <button class="btn" >下单</button>
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
@@ -114,15 +116,20 @@ const removeItem =async (index) => {
     if (obj_goods.length < 2) {
         var r = confirm('这是最后一个了,确认删除吗?');
         if (r == true) {
-            obj_goods.splice(index, 1)
+            await deleteCartItem({id: obj_goods[index].id}).then(response=>{
+                obj_goods.splice(index, 1);
+                ElMessage.success("删除成功");
+        })
         } else {
             return;
         }
     }else{
         await deleteCartItem({id: obj_goods[index].id}).then(response=>{
             console.log(response);
+            obj_goods.splice(index, 1);
+            ElMessage.success("删除成功");
         })
-        obj_goods.splice(index, 1);
+        
     }
 }
 
@@ -133,7 +140,7 @@ let id = userStore.user.id
 
 const getCartItemsProducts = async () =>{
     await getCartItems({id}).then(response=>{
-        // console.log(response);
+        console.log(response);
         if(response.data.data == null){
             ElMessage.error("购物车空空如也哦~~")
         }else{

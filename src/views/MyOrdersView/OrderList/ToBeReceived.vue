@@ -33,7 +33,7 @@
                         <span>￥{{item.orderTotal}}</span>
                     </div>
                     <div class="order_status">
-                        <button class="btn btn-sm btn-outline-primary">已收货</button>
+                        <button class="btn btn-sm btn-outline-primary" @click="change_order(index)">已收货</button>
                         <button class="btn btn-sm btn-outline-primary ms-1">拒收</button>
                     </div>
                 </div>
@@ -45,7 +45,9 @@
 <script setup>
 import { getAllorders } from '@/api/getAllOrders';
 import { reactive, ref } from 'vue'
+import { ElMessage } from 'element-plus'
 import useUserStore  from '@/stores/user';
+import { changeStatus } from '@/api/changeStatus'
 
 const userStore = useUserStore();
 
@@ -66,6 +68,23 @@ const getOrdres = async() =>{
         }
         }
         // console.log(Orders);
+    })
+}
+
+const change_order = async(index)=>{
+    const orderId = reactive({
+        id: Orders[index].id
+    })
+    console.log(orderId);
+    await changeStatus(orderId).then(response =>{
+        console.log(response);
+        if(response.data.status == 200){
+            ElMessage.success("欢迎您的下一次下单~~")
+            Orders.length = 0;
+            getOrdres();
+        }else{
+            ElMessage.error("Error");
+        }
     })
 }
 

@@ -20,6 +20,9 @@ export const useUserStore = defineStore('user', {
     actions: {
         setUser(value){
             this.user = value
+        },
+        setAvatar(value){
+            this.user.avatar = value;
         }
     },
     persist: {

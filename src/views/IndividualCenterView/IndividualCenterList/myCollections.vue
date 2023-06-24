@@ -13,7 +13,7 @@
                     <span>￥{{ item.price }}</span>
                 </h4>
                 <div class="text-center mb-2">
-                    <button class="btn btn-outline-danger mx-auto">取消收藏</button>
+                    <button class="btn btn-outline-danger mx-auto" @click="delete_collection(index)">取消收藏</button>
                 </div>
             </div>
             <div class="text-center" v-if="collections.length == 0">
@@ -26,8 +26,10 @@
 <script setup>
 import { reactive } from 'vue';
 import useUserStore from '@/stores/user';
+import { ElMessage } from 'element-plus'
 
 import { getMyCollectin } from '@/api/getMyCollection';
+import { deleteCollection } from '@/api/deleteCollection';
 
 const collections = reactive([]);
 const userStore = useUserStore();
@@ -40,7 +42,7 @@ const get_collectins = async () =>{
             return
         }else{
             for(var i=0; i<response.data.data.length; i++){
-            collections.push(response.data.data[0]);
+            collections.push(response.data.data[i]);
         }
         }
     })
@@ -48,6 +50,18 @@ const get_collectins = async () =>{
 
 get_collectins();
 
+
+const delete_collection = async (index)=>{
+    await deleteCollection({id: collections[index].id}).then(response=>{
+        if(response.data.status == 200){
+            ElMessage.success("取消成功");
+            collections.length = 0;
+            get_collectins();
+        }else{
+            ElMessage.error("出现异常请联系管理员！")
+        }
+    })
+}
 </script>
 
 <style scoped>

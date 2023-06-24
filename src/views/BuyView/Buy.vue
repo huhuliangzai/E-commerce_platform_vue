@@ -10,7 +10,7 @@
 
                     <div class="operate mt-3">
                         <ul class="d-inline-flex p-0 m-0">
-                            <li class="m-2"><i class="bi bi-star"></i>收藏</li>
+                            <li class="m-2" @click="isert_collection(index)"><i class="bi bi-star collection"></i>收藏</li>
                             <li class="m-2"><i class="bi bi-share"></i>分享</li>
                             <li class="m-2"><i class="bi bi-chat-dots"></i>在线客服</li>
                         </ul>
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="collect my-3 ps-4">
-                        <h6><span>收藏:</span><span class="ps-1">0</span></h6>
+                        <h6><span>收藏:</span><span class="ps-1">99</span></h6>
                     </div>
 
                     <div class="buy_information pt-1 ps-4">
@@ -61,7 +61,7 @@
                     <div>
                         <button class="text-danger bg-white border border-danger m-2 p-2 rounded"
                             @click="insert_CartItem"><i class="bi bi-cart-plus text-danger"
-                                v-disabled="cartItem.Quantity == 0"></i>加入购物车</button>
+                                :disabled="cartItem.Quantity == 0"></i>加入购物车</button>
                         <button class="m-2 p-2 text-white bg-danger border-0  rounded">立即购买</button>
                     </div>
 
@@ -99,6 +99,7 @@ import counter from '@/components/Counter.vue'
 
 import { getProductById } from '@/api/getProductById'
 import { insertCartItem } from '@/api/insertCartItem'
+import { insertCollection } from '@/api/insertCollection'
 import useUserStore from '@/stores/user';
 
 import { reactive } from 'vue'
@@ -125,7 +126,7 @@ const route = useRoute();
 
 let id = route.params.id;
 
-console.log("我是Id", id);
+// console.log("我是Id", id);
 
 const getProduct = async () => {
     await getProductById({ id }).then(response => {
@@ -147,7 +148,7 @@ const cartItem = reactive({
     total: '',
 })
 
-console.log(cartItem);
+// console.log(cartItem);
 
 const insert_CartItem = async () => {
     if (cartItem.Quantity > 0) {
@@ -164,6 +165,22 @@ const insert_CartItem = async () => {
     }else{
         ElMessage.error("购买数量需大于0")
     }
+}
+
+const collection = reactive({
+    userId: userStore.user.id,
+    productId: id
+})
+
+const isert_collection = async()=>{
+    console.log(collection);
+    await insertCollection(collection).then(response=>{
+        if(response.data.status == 200){
+            ElMessage.success("收藏成功");
+        }else{
+            ElMessage.error("已经收藏过啦~")
+        }
+    })
 }
 </script>
 
@@ -206,5 +223,9 @@ const insert_CartItem = async () => {
 
 .code_track:hover .buy_code {
     display: block;
+}
+
+.collection:hover{
+    background-color: yellow;
 }
 </style>

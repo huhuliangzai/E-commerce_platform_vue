@@ -100,6 +100,8 @@ const insert_address = async()=>{
         console.log(response);
         if(response.data.status == 200){
             ElMessage.success("添加成功");
+            userAddress.length = 0;
+            getAddresses();
         }
     })
 }

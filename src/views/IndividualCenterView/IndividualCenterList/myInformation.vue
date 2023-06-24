@@ -71,8 +71,8 @@ import { getUser } from '@/api/getUser'
 import { ElMessage } from 'element-plus';
 
 const userStore = useUserStore();
-let users = userStore.user;
-console.log(users);
+
+// console.log(users);
 const dialogFormVisible = ref(false)
 const formLabelWidth = '140px'
 
@@ -103,9 +103,9 @@ const user_editInformation = async () => {
 
 const get_user = async() =>{
     await getUser({id: userStore.user.id}).then(response=>{
-        console.log(response);
+        // console.log(response);
         userInfo.push(response.data.data)
-        console.log(userInfo)
+        // console.log(userInfo)
     })
 }
 get_user();
@@ -129,7 +129,7 @@ get_user();
     align-items: center;
 }
 
-.el-form-item__label{
+:deep(.el-form-item__label){
     color: black!important;
 }
 </style>

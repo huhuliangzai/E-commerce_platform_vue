@@ -5,10 +5,31 @@
             <div class="personal_main border rounded p-2">
                 <ul class="p-0 m-0 text-center">
                     <li class="personal_top d-flex align-items-center border rounded-top p-2">
-                        <img class="rounded-circle" :src="'src/assets/image/User/avater/'+user.avatar" alt="">
+                        <div class="demo-image__preview">
+                            <el-image
+                              style="width: 50px; height: 50px"
+                              :src="'src/assets/image/User/avater/'+user.avatar"
+                              :preview-src-list="srcList"
+                              fit="cover"
+                              class="rounded-circle"
+                            />
+                        </div>
                         <div class="personal_information">
                             <h5 class="p-0 m-0"><strong>{{user.userName}}</strong></h5>
                             <span>已实名</span>
+                        </div>
+                        <div class="ms-5 ps-5">
+                            <button type="button" class="btn btn-sm btn-outline-primary" @click="dialogVisible = true">
+                                更换头像
+                            </button>
+                            <el-dialog v-model="dialogVisible" title="更换头像" width="50%" draggable>
+                                <UpLoad></UpLoad>
+                                    <template #footer>
+                                      <span class="dialog-footer">
+                                        <el-button @click="dialogVisible = false">返回</el-button>
+                                      </span>
+                                    </template>
+                            </el-dialog>
                         </div>
                     </li>
                     <li class="border">
@@ -48,25 +69,21 @@
 <script setup>
 import { RouterLink,RouterView,useRouter } from "vue-router";
 import navBar from '@/components/header.vue'
-import { reactive } from 'vue'
+import UpLoad from '@/components/UpLoad.vue'
+import { reactive,ref } from 'vue'
+import { pinyin } from 'pinyin-pro'
 
 import pinia from '@/stores/store'
 import useUserStore from '@/stores/user';
 
 const userStore = useUserStore(pinia);
+const dialogVisible = ref(false)
 
 let user = reactive(userStore.user)
-// console.log(user);
 
-// const router = useRouter();
-
-// const routerRun = () =>{
-//     router.push('/IndividualCenter/myInformation');
-// }
-
-// setTimeout(() => {
-//     routerRun();
-// }, 500);
+const srcList = [
+    'src/assets/image/User/avater/'+user.avatar,
+]
 
 </script>
 
@@ -100,9 +117,15 @@ let user = reactive(userStore.user)
     color: skyblue;
 }
 
-.personal_top img{
-    width: 50px;
-    height: 50px;
-}
+.demo-image__error .image-slot {
+    font-size: 30px;
+  }
+  .demo-image__error .image-slot .el-icon {
+    font-size: 30px;
+  }
+  .demo-image__error .el-image {
+    width: 100%;
+    height: 200px;
+  }
 
 </style>

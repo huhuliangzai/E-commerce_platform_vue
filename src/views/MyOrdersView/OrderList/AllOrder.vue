@@ -65,7 +65,7 @@ const Orders = reactive([]);
 
 const getOrdres = async() =>{
     await getAllorders({id: userStore.user.id}).then(response=>{
-        // console.log(response);
+        console.log(response);
         if(response.data.data == null){
             ElMessage.error("你还没有下过单哦~~")
         }else{

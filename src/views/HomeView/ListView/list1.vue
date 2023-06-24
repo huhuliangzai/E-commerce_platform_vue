@@ -74,7 +74,7 @@ const getCategory = () => {
 
 const get_products = async () => {
     await getProducts(setCategoryName).then(response =>{
-        console.log(response);
+        // console.log(response);
         for (let i = 0; i < response.data.data.length; i++) {
             good_show.push(response.data.data[i])
         }

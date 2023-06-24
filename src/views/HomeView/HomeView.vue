@@ -1,7 +1,10 @@
 <template>
    <navBar />
    <carousel></carousel>
-   <search />
+   <div class="text-center">
+      <search v-model="searchForm.productName" />
+      <el-button class="text-center" @click="search_product">搜索</el-button>
+   </div>
    <div class="row row-deck row-cards">
       <div class="col-md-6 col-lg-4 my-2">
          <div class="card">
@@ -46,11 +49,12 @@
 </template>
 
 <script setup>
-import { RouterLink, RouterView, useRoute } from 'vue-router';
-import { reactive, onMounted } from 'vue';
+import { RouterLink, } from 'vue-router';
+import { reactive,} from 'vue';
+import { useRouter } from 'vue-router'
 
-import { getHotSaleAndCrazyProducts } from '../../api/getHotSaleAndCrazyProducts';
-
+import { getHotSaleAndCrazyProducts } from '@/api/getHotSaleAndCrazyProducts';
+import { searchProduct } from '@/api/searchProduct';
 
 import navBar from '@/components/header.vue'
 import carousel from '@/components/Carousel.vue'
@@ -58,12 +62,13 @@ import search from '@/components/Search.vue'
 import backtop from '@/components/Backtop.vue'
 import crezybuy from '@/views/HomeView/CrazyBuy.vue'
 import goodlist from '@/views/HomeView/Goodlist.vue'
+import { ElMessage } from 'element-plus';
 
 const hot_push = reactive([])
 
 const get_crazybuy = async () =>{
     await getHotSaleAndCrazyProducts({categoryName: "热推"}).then(response => {
-        console.log(response);
+      //   console.log(response);
         for (let i = 0; i < response.data.data.length;i++) {
          hot_push.push(response.data.data[i])
         }
@@ -72,7 +77,32 @@ const get_crazybuy = async () =>{
 
 get_crazybuy();
 
+const searchForm = reactive({
+   productName: '',
+})
 
+const router = useRouter()
+
+const toPage = () => {
+  router.push({
+    name: 'Search',
+    params: {
+      name: searchForm.productName
+    }
+  })
+}
+
+const search_product = async()=>{
+   // console.log(searchForm.productName);
+   await searchProduct({name: searchForm.productName}).then(response=>{
+      // console.log(response);
+      if(response.data.status == 200){
+         toPage()
+      }else{
+         ElMessage.error("搜索无结果");
+      }
+   })
+}
 </script>
 
 <style scoped>

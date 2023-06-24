@@ -1,18 +1,18 @@
 <template>
-    <div class="text-center">
         <el-input
-            v-model="input2"
+            v-model="inputForm"
             class="w-50 m-2"
             placeholder="请输入你想要搜索的商品"
             :suffix-icon="Search"
+            clearable
         />
-    </div>
 </template>
 
 <script setup> 
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { Search } from '@element-plus/icons-vue'
-const input2 = ref('')
+const inputForm = ref('')
+
 </script>
 
 <style scoped>
